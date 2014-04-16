@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mobbr.controllers')
-    .controller('LightboxController', function ($scope, $location, $timeout, $rootScope, MobbrPayment, MobbrUser, MobbrBalance, MobbrPerson) {
+angular.module('mobbr-lightbox.controllers')
+    .controller('LightboxController', function ($scope, $location, $timeout, $rootScope, MobbrPayment, MobbrUser, MobbrBalance, MobbrPerson, mobbrSession) {
 
         var hash,
             error,
@@ -56,7 +56,7 @@ angular.module('mobbr.controllers')
         }
 
         function checkLogin() {
-            if ($rootScope.$mobbrStorage.token) {
+            if (mobbrSession.isAuthorized()) {
                 MobbrBalance.user(function (response) {
                     $scope.userCurrencies = response.result;
                     $scope.currency = $scope.userCurrencies[0];
@@ -109,7 +109,7 @@ angular.module('mobbr.controllers')
         }
 
         $scope.login = function (data, notifyParent, do_register, do_perform) {
-            MobbrUser.login({ email: data.email.$modelValue, password: data.password.$modelValue }, function (response) {
+            MobbrUser.passwordLogin({ email: data.email.$modelValue, password: data.password.$modelValue }, function (response) {
                 if (response.result != undefined && response.result != null) {
                     do_register && register();
                     do_perform && perform();

@@ -7,7 +7,7 @@
 <!--[if !IE]><!--><html xmlns:ng="http://angularjs.org"> <!--<![endif]-->
     <head>
         <!-- build:js scripts/combined-head.js -->
-        <script src="../components/modernizr/modernizr.js"></script>
+        <script src="components/modernizr/modernizr.js"></script>
         <!-- endbuild -->
         <!--[if lte IE 8]>
         <script>
@@ -43,8 +43,8 @@
         <meta name="description" content="Welcome to MOBBR, the world's first crowdpayment system. Start sharing rewards and donations in bitcoin, XRP, social currencies and FIAT currencies.">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
-        <!-- build:css ../styles/style-lightbox.css -->
-        <link href="../styles/style-lightbox.css" rel="stylesheet">
+        <!-- build:css styles/style-lightbox.css -->
+        <link href="styles/style-lightbox.css" rel="stylesheet">
         <!-- endbuild -->
     </head>
     <body ng-app="mobbr-lightbox" id="ng-app" ng-class="{ 'mobbr-test': isTest() !== -1, 'ng-app': true, 'loading': loading }" ng-controller="LightboxController" idle-timeout>
@@ -55,8 +55,7 @@
         <![endif]-->
         <!-- build:js scripts/combined-ie.js -->
         <!--[if lt IE 9]>
-        <script src="../components/es5-shim/es5-shim.js"></script>
-        <script src="../components/json3/lib/json3.js"></script>
+        <script src="components/es5-shim/es5-shim.js"></script>
         <![endif]-->
         <!-- endbuild -->
         <div class="wrapper" ng-cloak>
@@ -197,28 +196,24 @@
                 </div>
             </div>
         </div>
-        <!-- build:js ../scripts/combined.js -->
-        <script src="../components/base64/base64.js"></script>
-        <script src="../components/angular/angular.js"></script>
-        <script src="../components/angular-resource/angular-resource.js"></script>
-        <script src="../components/mobbr-api-angular/mobbr-api.src.js"></script>
-        <script src="../components/mobbr-api-angular/mobbr-api-msg.src.js"></script>
-        <script src="../components/mobbr-api-angular/mobbr-api-session.src.js"></script>
-        <script src="../components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-        <script src="../components/angular-route/angular-route.js"></script>
-        <script src="../components/js-md5/js/md5.js"></script>
-        <script src="../components/ngstorage/ngStorage.js"></script>
-        <script src="../scripts/config.js"></script>
+        <!-- build:js scripts/combined.js -->
+        <script src="components/angular/angular.js"></script>
+        <script src="components/angular-route/angular-route.js"></script>
+        <script src="components/angular-resource/angular-resource.js"></script>
+        <script src="components/ngstorage/ngStorage.js"></script>
+        <script src="components/mobbr-api-angular/mobbr-api.src.js"></script>
+        <script src="components/mobbr-api-angular/mobbr-api-msg.src.js"></script>
+        <script src="components/mobbr-api-angular/mobbr-api-session.src.js"></script>
+        <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <!-- endbuild -->
-        <!-- build:js ../scripts/mobbr-core.js -->
-        <script src="../scripts/services/idleTimeout.js"></script>
-        <!-- endbuild -->
-        <!-- build:js ../scripts/mobbr-lightbox.js -->
+        <!-- build:js scripts/mobbr-lightbox.js -->
+        <script src="scripts/config.js"></script>
         <script src="scripts/app.js"></script>
-        <script src="../scripts/filters/mobbrcurrency.js"></script>
-        <script src="../scripts/directives/decorateAmount.js"></script>
-        <script src="../scripts/directives/placeholder.js"></script>
-        <script src="../scripts/directives/mobbrtable.js"></script>
+        <script src="scripts/services/idleTimeout.js"></script>
+        <script src="scripts/filters/mobbrcurrency.js"></script>
+        <script src="scripts/directives/decorateAmount.js"></script>
+        <script src="scripts/directives/placeholder.js"></script>
+        <script src="scripts/directives/mobbrtable.js"></script>
         <script src="scripts/controllers/LightboxController.js"></script>
         <!-- endbuild -->
     </body>

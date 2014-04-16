@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('mobbr.controllers', []);
-angular.module('mobbr.directives', []);
-angular.module('mobbr.filters', []);
-angular.module('mobbr.configuration', []);
+angular.module('mobbr-lightbox.controllers', []);
+angular.module('mobbr-lightbox.directives', []);
+angular.module('mobbr-lightbox.filters', []);
+angular.module('mobbr-lightbox.configuration', []);
 
 angular.module('mobbr-lightbox', [
 
@@ -12,10 +12,10 @@ angular.module('mobbr-lightbox', [
         'mobbrSession',
         'ngRoute',
         'ui.bootstrap',
-        'mobbr.config',
-        'mobbr.directives',
-        'mobbr.controllers',
-        'mobbr.filters'
+        'mobbr-lightbox.config',
+        'mobbr-lightbox.directives',
+        'mobbr-lightbox.controllers',
+        'mobbr-lightbox.filters'
 
     ]).run(function ($http, $rootScope, $route, $location, $window, MobbrApi, MobbrUser) {
 
