@@ -27,7 +27,7 @@ angular.module('mobbr-lightbox', [
 
         $rootScope.logout = function () {
             MobbrUser.logout();
-        }
+        };
 
         $rootScope.$on('mobbrApi:authchange', function (user) {
             $route.reload();
@@ -35,6 +35,10 @@ angular.module('mobbr-lightbox', [
                 $window.parent.postMessage(user && [ user.username, user.email ].join('|') || 'logout', '*');
             }
         });
+
+        $rootScope.linkUrl = function (url) {
+            return '/#/url/' + window.btoa(url);
+        }
 
         $rootScope.isTest = function () {
             return window.location.href.search('test-www.mobbr.com');

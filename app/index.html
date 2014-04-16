@@ -143,8 +143,13 @@
                                     <span class="headlabel">Item:</span>
                                     <strong ng-show="!isOpen" ng-bind="urlData.script.title" class="itemtitle"></strong>
                                 </accordion-heading>
-                                <img ng-src="{{ urlData.script.image }}" class="pull-left" width="100">
+                                <a href="{{ linkUrl(urlData.script.url) }}" target="_blank">
+                                    <img ng-src="{{ urlData.script.image }}" class="pull-left" width="100">
+                                </a>
                                 <div ng-bind="urlData.script.description"></div>
+                                <a href="{{ linkUrl(urlData.script.url) }}" target="_blank">
+                                    More information
+                                </a>
                             </accordion-group>
                             <accordion-group class="nowrap-header" ng-show="!$parent.noscript && !$parent.noparticipants" is-open="false">
                                 <accordion-heading>
