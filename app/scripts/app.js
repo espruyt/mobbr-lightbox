@@ -29,7 +29,7 @@ angular.module('mobbr-lightbox', [
             MobbrUser.logout();
         };
 
-        $rootScope.$on('mobbrApi:authchange', function (user) {
+        $rootScope.$on('mobbrApi:authchange', function (e, user) {
             $route.reload();
             if ($window.parent && $window.parent.postMessage) {
                 $window.parent.postMessage(user && [ user.username, user.email ].join('|') || 'logout', '*');
