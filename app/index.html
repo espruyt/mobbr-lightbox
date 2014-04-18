@@ -86,7 +86,7 @@
             </div>
 
             <div>
-                <h2 style="margin: 0 0 15px 0" ng-show="dologin" ng-bind="$mobbrStorage.token && 'Logged in as: ' + $mobbrStorage.user.username || 'Login to Fast Moving Crowdwork'"></h2>
+                <h2 style="margin: 0 0 15px 0" ng-show="dologin" ng-bind="$mobbrStorage.token && 'Logged in as: ' + $mobbrStorage.user.username || 'Login'"></h2>
                 <div ng-show="!(dologin && $mobbrStorage.token)" id="login_form">
                     <form name="login_form" autocomplete="off" class="form-inline lightboxform">
                         <fieldset ng-disabled="laterpaying || nowpaying">
