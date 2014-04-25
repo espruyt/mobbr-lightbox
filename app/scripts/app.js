@@ -17,7 +17,7 @@ angular.module('mobbr-lightbox', [
         'mobbr-lightbox.controllers',
         'mobbr-lightbox.filters'
 
-    ]).run(function ($http, $rootScope, $route, $location, $window, MobbrApi, MobbrUser) {
+    ]).run(function ($http, $rootScope, $route, $location, $window, MobbrApi, MobbrUser, environment) {
 
         $rootScope.login = function (email, password) {
             MobbrUser.passwordLogin({ email: email, password: password }, function () {
@@ -41,7 +41,7 @@ angular.module('mobbr-lightbox', [
         }
 
         $rootScope.isTest = function () {
-            return window.location.href.search('test-www.mobbr.com');
+            return environment !== 'production';
         }
 
         $rootScope.currenciesMap = {};

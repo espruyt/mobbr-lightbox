@@ -15,11 +15,13 @@ module.exports = function (grunt) {
   var site;
 
   if (env === 'test') {
-    site = 'test-www.mobbr.com';
+    site = 'test-lightbox.mobbr.com';
+  } else if (env === 'stage') {
+    site = 'stage-lightbox.mobbr.com';
   } else if (env === 'dev') {
     site = 'api.mobbr.dev';
   } else {
-    site = "www.mobbr.com";
+    site = "lightbox.mobbr.com";
   }
   // configurable paths
   var yeomanConfig = {
@@ -44,7 +46,7 @@ module.exports = function (grunt) {
           '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
           '<%= yeoman.app %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ],
-        tasks: ['livereload']
+        tasks: [ 'livereload', 'compass:server' ]
       }
     },
     connect: {
@@ -130,7 +132,7 @@ module.exports = function (grunt) {
           {
             expand: true,
             cwd: '<%= yeoman.app %>/img',
-            src: '{,*/}*.{png,jpg,jpeg}',
+            src: '{,*/}*.{png,jpg,jpeg,gif}',
             dest: '<%= yeoman.dist %>/img'
           }
         ]
@@ -277,7 +279,18 @@ module.exports = function (grunt) {
           }
         }
       ],
-      prod: [
+      stage: [
+        {
+          dest: '<%= yeoman.app %>/scripts/config.js',
+          name: 'mobbr-lightbox.config',
+          wrap: '(function() { \n return <%= __ngModule %> \n\n})();',
+          constants: {
+            'apiUrl': 'https://stage-api.mobbr.com',
+            'environment': 'stage'
+          }
+        }
+      ],
+      production: [
         {
           dest: '<%= yeoman.app %>/scripts/config.js',
           name: 'mobbr-lightbox.config',
@@ -303,13 +316,19 @@ module.exports = function (grunt) {
     sshconfig: {
       test: {
         host: 'test-www.mobbr.com',
-        username: 'keesdekooter',
+        username: 'handijk',
         agent: process.env.SSH_AUTH_SOCK,
         showProgress: true
       },
-      prod: {
-        host: 'www.mobbr.com',
-        username: 'keesdekooter',
+      production: {
+        host: 'mobbr.com',
+        username: 'handijk',
+        agent: process.env.SSH_AUTH_SOCK,
+        showProgress: true
+      },
+      stage: {
+        host: 'mobbr.com',
+        username: 'handijk',
         agent: process.env.SSH_AUTH_SOCK,
         showProgress: true
       }
@@ -331,13 +350,13 @@ module.exports = function (grunt) {
           'cd /tmp',
           'rm -Rf dist/',
           'tar -xzf dist-' + env + '-' + version + '.tar.gz',
-          'mkdir /var/www/' + env  + '-' + version,
-          'cp -R dist/* /var/www/' + env  + '-' + version,
+          'mkdir /var/www/' + env  + '-lightbox-' + version,
+          'cp -R dist/* /var/www/' + env  + '-lightbox-' + version,
           'cd /var/www/',
-          'chgrp -R www-data ' + env  + '-' + version,
+          //'chgrp -R www-data ' + 'www-' + env  + '-' + version,
           'rm -f ' + site,
-          'ln -s ' + env  + '-' + version + ' ' + site,
-          'chgrp -h www-data ' + site
+          'ln -s ' + env  + '-lightbox-' + version + ' ' + site
+          //'chgrp -h www-data ' + site
         ].join(' && '),
         options: {
           config: env
@@ -359,22 +378,22 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
-      'clean:dist',
-      'bower-install-simple',
-      'compass:dist',
-      'useminPrepare',
-      'ngtemplates',
-      'imagemin',
-      'cssmin:dist',
-      'ngconstant:' + env,
-      'concat',
-      'copy',
-      'ngmin',
-      'uglify',
-      'rev',
-      'htmlmin',
-      'usemin',
-      'compress'
+    'clean:dist',
+    'bower-install-simple',
+    'compass:dist',
+    'useminPrepare',
+    'ngtemplates',
+    'imagemin',
+    'cssmin:dist',
+    'ngconstant:' + env,
+    'concat',
+    'copy',
+    'ngmin',
+    'uglify',
+    'rev',
+    'htmlmin',
+    'usemin',
+    'compress'
   ]);
 
   grunt.registerTask('deploy', [
