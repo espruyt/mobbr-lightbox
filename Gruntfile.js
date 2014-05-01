@@ -1,5 +1,4 @@
 'use strict';
-var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 var moment = require('moment');
 var mountFolder = function (connect, dir) {
   return connect.static(require('path').resolve(dir));
@@ -39,47 +38,36 @@ module.exports = function (grunt) {
   grunt.initConfig({
     yeoman: yeomanConfig,
     watch: {
-      livereload: {
-        files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-        ],
-        tasks: [ 'livereload', 'compass:server' ]
-      }
+        all: {
+            files: [
+                '<%= yeoman.app %>/{,*/}*.html',
+                '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js'
+            ],
+            tasks: [ ],
+            options: {
+                livereload: true
+            }
+        },
+        css: {
+            files: [
+                '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.scss'
+            ],
+            tasks: [ 'compass:server' ]
+        }
     },
     connect: {
-      options: {
-        port: 9000,
-        // Change this to '0.0.0.0' to access the server from outside.
-        hostname: '0.0.0.0'
-      },
-      livereload: {
-        options: {
-          middleware: function (connect) {
-            return [
-              lrSnippet,
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, yeomanConfig.app)
-            ];
-          }
+        all: {
+            options: {
+                port: 9000,
+                hostname: '0.0.0.0',
+                livereload: true,
+                base: 'app'
+            }
         }
-      },
-      test: {
-        options: {
-          middleware: function (connect) {
-            return [
-              mountFolder(connect, '.tmp'),
-              mountFolder(connect, 'test')
-            ];
-          }
-        }
-      }
     },
     open: {
-      server: {
-        url: 'http://localhost:<%= connect.options.port %>'
+      all: {
+        url: 'http://mobbr.dev:<%= connect.all.options.port %>'
       }
     },
     clean: {
@@ -365,15 +353,14 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.renameTask('regarde', 'watch');
+  //grunt.renameTask('regarde', 'watch');
 
   grunt.registerTask('server', [
     'clean:server',
     'compass:server',
     'ngconstant:' + env,
-    'livereload-start',
-    'connect:livereload',
     'open',
+    'connect',
     'watch'
   ]);
 
