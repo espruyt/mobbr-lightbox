@@ -58,7 +58,7 @@ angular.module('mobbr-lightbox.controllers')
         function checkLogin() {
             if (mobbrSession.isAuthorized()) {
                 MobbrBalance.user(function (response) {
-                    $scope.userCurrencies = response.result;
+                    $scope.userCurrencies = response.result.balances;
                     $scope.currency = $scope.userCurrencies[0];
                 });
             } else {
