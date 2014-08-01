@@ -45,7 +45,7 @@ angular.module('mobbr-lightbox', [
         }
 
         $rootScope.currenciesMap = {};
-        MobbrApi.forexCurrencies(function (response) {
+        MobbrApi.currencies(function (response) {
             if (response.result != null) {
                 $rootScope.currenciesMap = response.result;
             } else if (response.message != null) {
