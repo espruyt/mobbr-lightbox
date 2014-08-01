@@ -95,7 +95,7 @@
                             </p>
                             <p class="loginerror alert alert-error" ng-show="customerror" ng-bind="customerror"></p>
                             <p ng-show="marked != false && !$mobbrStorage.token">
-                                <input ng-model="email" ng-disabled="$mobbrStorage.token" required type="email" name="email" placeholder="email address" autocomplete="off" class="input-medium">
+                                <input ng-model="email" ng-disabled="$mobbrStorage.token" required type="text" name="email" placeholder="username" autocomplete="off" class="input-medium">
                                 <input ng-model="password" ng-disabled="$mobbrStorage.token" required type="password" name="password" placeholder="password" autocomplete="off" class="input-medium">
                                 <button ng-disabled="!email || !password" ng-click="login(login_form, true, false)" ng-show="dologin" class="btn btn-success">
                                     Login
@@ -109,13 +109,13 @@
                                         required
                                         ng-show="$mobbrStorage.token"
                                         ng-model="currency"
-                                        ng-options="value.currency_iso for value in userCurrencies"
+                                        ng-options="currency.currency_iso as (currency.currency_description || currency.currency_iso) for currency in userCurrencies.result.balances | orderBy: 'description'"
                                         ng-change="paymentChanged(payment)"></select>
                                 <select class="input-small"
                                         required
                                         ng-show="!$mobbrStorage.token"
                                         ng-model="currency"
-                                        ng-options="key as key for (key, value) in currenciesMap"
+                                        ng-options="currency.currency_iso as currency.description for currency in currenciesMap.result | orderBy: 'description'"
                                         ng-change="paymentChanged(payment)"></select>
                                 <input class="input-small"
                                        required

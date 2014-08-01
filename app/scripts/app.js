@@ -20,7 +20,7 @@ angular.module('mobbr-lightbox', [
     ]).run(function ($http, $rootScope, $route, $location, $window, MobbrApi, MobbrUser, environment) {
 
         $rootScope.login = function (email, password) {
-            MobbrUser.passwordLogin({ email: email, password: password }, function () {
+            MobbrUser.passwordLogin({ username: email, password: password }, function () {
                 $location.path('/wallet');
             });
         };
@@ -44,14 +44,6 @@ angular.module('mobbr-lightbox', [
             return environment !== 'production';
         }
 
-        $rootScope.currenciesMap = {};
-        MobbrApi.forexCurrencies(function (response) {
-            if (response.result != null) {
-                $rootScope.currenciesMap = response.result;
-            } else if (response.message != null) {
-                console.log('error loading currencies' + response.error.status);
-            }
-            $rootScope.currenciesMap['MBR'] = 'Mobbr';
-        });
+        $rootScope.currenciesMap = MobbrApi.currencies();
     }
 );

@@ -25,13 +25,13 @@ angular.module('mobbr-lightbox.controllers')
                 $scope.marked = false;
             } else if (hash) {
                 $scope.dologin = false;
-                MobbrPayment.preview({ data: window.atob(hash), referrer: document.referrer }, function (response) {
+                MobbrPayment.preview({ data: window.atob(hash), referrer: document.referrer || 'mobbr.dev' }, function (response) {
                     hash = response.result.hash;
                     $scope.urlData = response.result;
                     $scope.noscript = $scope.urlData.script['.scripts_found'] === undefined || $scope.urlData.script['.scripts_found'].length === 0;
                     $scope.noparticipants = $scope.urlData.script['participants'] === undefined || $scope.urlData.script['participants'].length === 0;
                     $scope.loading = false;
-                    $scope.persons = MobbrPerson.url({ url: response.result.url });
+                    $scope.persons = MobbrPerson.uri_payers({ url: response.result.url });
                     $scope.balances = MobbrBalance.uri({ url: response.result.url });
                 }, function (response) {
                     $scope.errormessage = response.data && response.data.message && response.data.message.text;
@@ -57,10 +57,7 @@ angular.module('mobbr-lightbox.controllers')
 
         function checkLogin() {
             if (mobbrSession.isAuthorized()) {
-                MobbrBalance.user(function (response) {
-                    $scope.userCurrencies = response.result.balances;
-                    $scope.currency = $scope.userCurrencies[0];
-                });
+                $scope.userCurrencies = MobbrBalance.user();
             } else {
                 $scope.currency = 'EUR';
             }
@@ -69,9 +66,6 @@ angular.module('mobbr-lightbox.controllers')
         function perform() {
             var currency = $scope.currency && $scope.currency.currency_iso || $scope.currency;
             MobbrPayment.confirm({
-                referrer: document.referrer,
-                currency: currency,
-                amount: $scope.amount,
                 hash: hash
             }, function (response) {
                 $scope.marked = true;
@@ -109,7 +103,7 @@ angular.module('mobbr-lightbox.controllers')
         }
 
         $scope.login = function (data, notifyParent, do_register, do_perform) {
-            MobbrUser.passwordLogin({ email: data.email.$modelValue, password: data.password.$modelValue }, function (response) {
+            MobbrUser.passwordLogin({ username: data.email.$modelValue, password: data.password.$modelValue }, function (response) {
                 if (response.result != undefined && response.result != null) {
                     do_register && register();
                     do_perform && perform();

@@ -8,7 +8,7 @@
     "modernizr": "~2.6.2",
     "es5-shim": "~2.1.0",
     "sass-bootstrap": "2.3.1",
-    "mobbr-api-angular": "git://github.com/mobbr/mobbr-api-angular#785b6e991aa9110a07bc6d70da9f5b3728596c79"
+    "mobbr-api-angular": "git://github.com/mobbr/mobbr-api-angular.git#bebc9751dcd9daa210f8336795588e7d75a042a9"
   },
   "ignore": [
     "**/.*",
