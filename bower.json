@@ -8,7 +8,11 @@
     "modernizr": "~2.6.2",
     "es5-shim": "~2.1.0",
     "sass-bootstrap": "2.3.1",
-    "mobbr-api-angular": "git://github.com/mobbr/mobbr-api-angular.git#65d353b6c62046f4b729a0e1ede4ba729cbda1c5"
+    "mobbr-api-angular": "git://github.com/mobbr/mobbr-api-angular.git#65e1f0b130a50682839160999bd341504d15d8a4",
+    "angular-moment": "0.8.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.20"
   },
   "ignore": [
     "**/.*",
@@ -17,6 +21,6 @@
   ],
   "main": "app/index.html",
   "resolutions": {
-    "angular": "1.2.21"
+    "angular": "1.2.22"
   }
 }
