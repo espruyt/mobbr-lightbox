@@ -47,7 +47,7 @@
         <link href="styles/style-lightbox.css" rel="stylesheet">
         <!-- endbuild -->
     </head>
-    <body ng-app="mobbr-lightbox" id="ng-app" ng-class="{ 'mobbr-test': isTest(), 'ng-app': true, 'loading': loading }" ng-controller="LightboxController" idle-timeout>
+    <body ng-app="mobbr-lightbox" id="ng-app" ng-class="{ 'mobbr-test': isTest(), 'ng-app': true }" idle-timeout>
         <!--[if lt IE 8]>
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser
             today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better
@@ -59,147 +59,123 @@
         <![endif]-->
         <!-- endbuild -->
         <div class="wrapper" ng-cloak>
-            <div ng-show="marked == false">
-                <h2 ng-bind="errormessage"></h2>
-                <fieldset>
-                    <legend>
-                        Checklist for webmasters of <span ng-bind="json['url']"></span>
-                    </legend>
-                    <div class="error">
-                        <ul>
-                            <li>
-                                The syntax of the script is invalid, use a JSON-validator
-                                </br>&rarr; <a target="_blank" href="http://www.jsonlint.com/">http://www.jsonlint.com/</a>
-                            </li>
-                            <li>
-                                The schema of the script is invalid, use the Mobbr script validator
-                                </br>&rarr; <a target="_blank" href="/#/validate">#/validate</a>
-                            </li>
-                            <li>
-                                Values are out-of-range , check the specifications
-                                </br>&rarr; <a target="_blank" href="http://mobbr.com/protocol.html">http://mobbr.com/protocol.html</a>
-                            </li>
-                        </ul>
-                        Visit <a href="/#/integration">the website</a> for instructions on using the buttons and widgets.
-                    </div>
-                </fieldset>
-            </div>
+            <div ng-view=""></div>
 
-            <div>
-                <h2 style="margin: 0 0 15px 0" ng-show="dologin" ng-bind="$mobbrStorage.token && 'Logged in as: ' + $mobbrStorage.user.username || 'Login'"></h2>
-                <div ng-show="!(dologin && $mobbrStorage.token)" id="login_form">
-                    <form name="login_form" autocomplete="off" class="form-inline lightboxform">
-                        <fieldset ng-disabled="laterpaying || nowpaying">
-                            <p class="loginerror alert alert-error" ng-show="loginerror">
-                                Wrong email/password
-                            </p>
-                            <p class="loginerror alert alert-error" ng-show="customerror" ng-bind="customerror"></p>
-                            <p ng-show="marked != false && !$mobbrStorage.token">
-                                <input ng-model="email" ng-disabled="$mobbrStorage.token" required type="text" name="email" placeholder="username" autocomplete="off" class="input-medium">
-                                <input ng-model="password" ng-disabled="$mobbrStorage.token" required type="password" name="password" placeholder="password" autocomplete="off" class="input-medium">
-                                <button ng-disabled="!email || !password" ng-click="login(login_form, true, false)" ng-show="dologin" class="btn btn-success">
-                                    Login
-                                </button>
-                            </p>
-                            <p id="newuser" ng-show="dologin || marked == undefined && !$mobbrStorage.token">
-                                New user or forgotten password? &rarr; <a href="/#/join" target="_blank">Go here</a>
-                            </p>
-                            <span ng-show="!dologin && marked == undefined">
-                                <select class="input-small"
-                                        required
-                                        ng-show="$mobbrStorage.token"
-                                        ng-model="currency"
-                                        ng-options="currency.currency_iso as (currency.currency_description || currency.currency_iso) for currency in userCurrencies.result.balances | orderBy: 'description'"
-                                        ng-change="paymentChanged(payment)"></select>
-                                <select class="input-small"
-                                        required
-                                        ng-show="!$mobbrStorage.token"
-                                        ng-model="currency"
-                                        ng-options="currency.currency_iso as currency.description for currency in currenciesMap.result | orderBy: 'description'"
-                                        ng-change="paymentChanged(payment)"></select>
-                                <input class="input-small"
-                                       required
-                                       type="number"
-                                       ng-model="amount"
-                                       step="any"
-                                       min="0"
-                                       max="1000000000">
-                                <button ng-disabled="nowpaying || laterpaying || (!$mobbrStorage.token && (!email || !password))"
-                                        ng-show="!dologin"
-                                        ng-click="performPayment(login_form)"
-                                        class="btn btn-success">
-                                    <span ng-bind="urlData.script.type"></span>
-                                </button>
-                            </span>
-                        </fieldset>
-                    </form>
-                </div>
-                <div ng-switch on="marked" ng-show="!dologin">
-                    <div ng-switch-when="undefined">
-                        <div class="well special" ng-bind="urlData.script.message || urlData.script.description"></div>
-                        <accordion close-others="true">
-                            <accordion-group is-open="false">
-                                <accordion-heading>
-                                    <span class="headlabel">Item:</span>
-                                    <strong ng-show="!isOpen" ng-bind="urlData.script.title" class="itemtitle"></strong>
-                                </accordion-heading>
-                                <a href="{{ linkUrl(urlData.script.url) }}" target="_blank">
-                                    <img ng-src="{{ urlData.script.image }}" class="pull-left" width="100">
-                                </a>
-                                <div ng-bind="urlData.script.description"></div>
-                                <a href="{{ linkUrl(urlData.script.url) }}" target="_blank">
-                                    More information
-                                </a>
-                            </accordion-group>
-                            <accordion-group class="nowrap-header" ng-show="!$parent.noscript && !$parent.noparticipants" is-open="false">
-                                <accordion-heading>
-                                    <span class="headlabel">Participants:</span>
-                                    <ul class="inline gravatar-heading">
-                                        <li ng-repeat="participant in urlData.script.participants">
-                                            <img ng-src="https://secure.gravatar.com/avatar/{{ participant['.gravatar'] }}?s=20&default=https://mobbr.com/img/default-gravatar.png" class="img-rounded-small">
-                                        </li>
-                                    </ul>
-                                </accordion-heading>
-                                <mobbrtable entries="urlData.script.participants"
-                                            columns="['.gravatar','.org-id','role','.percentage']"></mobbrtable>
-                            </accordion-group>
-                            <accordion-group is-open="false" ng-show="!noscript">
-                                <accordion-heading>
-                                    <span class="headlabel" ng-bind="(urlData.script.participants.length > 0 && 'History' || 'Pledged') + ':'"></span>
-                                    <ul class="inline gravatar-heading">
-                                        <li ng-repeat="balance in balances.result">
-                                            <strong ng-bind="(balance.amount | currency:balance.currency_iso)"></strong>
-                                        </li>
-                                    </ul>
-                                </accordion-heading>
-                                <mobbrtable entries="persons.result"
-                                            columns="[ 'gravatar-xsmall', 'username', 'role', 'currency_iso', 'amount' ]"></mobbrtable>
-                            </accordion-group>
-                        </accordion>
-                    </div>
-                    <div ng-switch-when="true">
-                        <div ng-show="nowpayed">
-                            <h2>Payment was completed!</h2>
-                            <p>
-                                Invoices and receipts for payments can be found at your Mobbr dashboards.
-                            </p>
-                            <p>
-                                The recipient(s) will be notified. You may now close this window.
-                            </p>
-                            <p>
-                                The buttons will be updated in a few minutes.
-                            </p>
-                        </div>
-                        <div ng-show="laterpayed">
-                            <h2>Registered for later payment!</h2>
-                            <p>
-                                These payments are collected <a target="_blank" href="/#/wallet">in your wallet</a>.
-                                You can review them and make them final all at once every week or so. You may now close this window.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!--<div>-->
+                <!--<h2 style="margin: 0 0 15px 0" ng-show="dologin" ng-bind="$mobbrStorage.token && 'Logged in as: ' + $mobbrStorage.user.username || 'Login'"></h2>-->
+                <!--<div ng-show="!(dologin && $mobbrStorage.token)" id="login_form">-->
+                    <!--<form name="login_form" autocomplete="off" class="form-inline lightboxform">-->
+                        <!--<fieldset ng-disabled="laterpaying || nowpaying">-->
+                            <!--<p class="loginerror alert alert-error" ng-show="loginerror">-->
+                                <!--Wrong email/password-->
+                            <!--</p>-->
+                            <!--<p class="loginerror alert alert-error" ng-show="customerror" ng-bind="customerror"></p>-->
+                            <!--<p ng-show="marked != false && !$mobbrStorage.token">-->
+                                <!--<input ng-model="email" ng-disabled="$mobbrStorage.token" required type="email" name="email" placeholder="email address" autocomplete="off" class="input-medium">-->
+                                <!--<input ng-model="password" ng-disabled="$mobbrStorage.token" required type="password" name="password" placeholder="password" autocomplete="off" class="input-medium">-->
+                                <!--<button ng-disabled="!email || !password" ng-click="login(login_form, true, false)" ng-show="dologin" class="btn btn-success">-->
+                                    <!--Login-->
+                                <!--</button>-->
+                            <!--</p>-->
+                            <!--<p id="newuser" ng-show="dologin || marked == undefined && !$mobbrStorage.token">-->
+                                <!--New user or forgotten password? &rarr; <a href="/#/join" target="_blank">Go here</a>-->
+                            <!--</p>-->
+                            <!--<span ng-show="!dologin && marked == undefined">-->
+                                <!--<select class="input-small"-->
+                                        <!--required-->
+                                        <!--ng-show="$mobbrStorage.token"-->
+                                        <!--ng-model="currency"-->
+                                        <!--ng-options="value.currency_iso for value in userCurrencies"-->
+                                        <!--ng-change="paymentChanged(payment)"></select>-->
+                                <!--<select class="input-small"-->
+                                        <!--required-->
+                                        <!--ng-show="!$mobbrStorage.token"-->
+                                        <!--ng-model="currency"-->
+                                        <!--ng-options="key as key for (key, value) in currenciesMap"-->
+                                        <!--ng-change="paymentChanged(payment)"></select>-->
+                                <!--<input class="input-small"-->
+                                       <!--required-->
+                                       <!--type="number"-->
+                                       <!--ng-model="amount"-->
+                                       <!--step="any"-->
+                                       <!--min="0"-->
+                                       <!--max="1000000000">-->
+                                <!--<button ng-disabled="nowpaying || laterpaying || (!$mobbrStorage.token && (!email || !password))"-->
+                                        <!--ng-show="!dologin"-->
+                                        <!--ng-click="performPayment(login_form)"-->
+                                        <!--class="btn btn-success">-->
+                                    <!--<span ng-bind="urlData.script.type"></span>-->
+                                <!--</button>-->
+                            <!--</span>-->
+                        <!--</fieldset>-->
+                    <!--</form>-->
+                <!--</div>-->
+                <!--<div ng-switch on="marked" ng-show="!dologin">-->
+                    <!--<div ng-switch-when="undefined">-->
+                        <!--<div class="well special" ng-bind="urlData.script.message || urlData.script.description"></div>-->
+                        <!--<accordion close-others="true">-->
+                            <!--<accordion-group is-open="false">-->
+                                <!--<accordion-heading>-->
+                                    <!--<span class="headlabel">Item:</span>-->
+                                    <!--<strong ng-show="!isOpen" ng-bind="urlData.script.title" class="itemtitle"></strong>-->
+                                <!--</accordion-heading>-->
+                                <!--<a href="{{ linkUrl(urlData.script.url) }}" target="_blank">-->
+                                    <!--<img ng-src="{{ urlData.script.image }}" class="pull-left" width="100">-->
+                                <!--</a>-->
+                                <!--<div ng-bind="urlData.script.description"></div>-->
+                                <!--<a href="{{ linkUrl(urlData.script.url) }}" target="_blank">-->
+                                    <!--More information-->
+                                <!--</a>-->
+                            <!--</accordion-group>-->
+                            <!--<accordion-group class="nowrap-header" ng-show="!$parent.noscript && !$parent.noparticipants" is-open="false">-->
+                                <!--<accordion-heading>-->
+                                    <!--<span class="headlabel">Participants:</span>-->
+                                    <!--<ul class="inline gravatar-heading">-->
+                                        <!--<li ng-repeat="participant in urlData.script.participants">-->
+                                            <!--<img ng-src="https://secure.gravatar.com/avatar/{{ participant['.gravatar'] }}?s=20&default=https://mobbr.com/img/default-gravatar.png" class="img-rounded-small">-->
+                                        <!--</li>-->
+                                    <!--</ul>-->
+                                <!--</accordion-heading>-->
+                                <!--<mobbrtable entries="urlData.script.participants"-->
+                                            <!--columns="['.gravatar','.org-id','role','.percentage']"></mobbrtable>-->
+                            <!--</accordion-group>-->
+                            <!--<accordion-group is-open="false" ng-show="!noscript">-->
+                                <!--<accordion-heading>-->
+                                    <!--<span class="headlabel" ng-bind="(urlData.script.participants.length > 0 && 'History' || 'Pledged') + ':'"></span>-->
+                                    <!--<ul class="inline gravatar-heading">-->
+                                        <!--<li ng-repeat="balance in balances.result">-->
+                                            <!--<strong ng-bind="(balance.amount | currency:balance.currency_iso)"></strong>-->
+                                        <!--</li>-->
+                                    <!--</ul>-->
+                                <!--</accordion-heading>-->
+                                <!--<mobbrtable entries="persons.result"-->
+                                            <!--columns="[ 'gravatar-xsmall', 'username', 'role', 'currency_iso', 'amount' ]"></mobbrtable>-->
+                            <!--</accordion-group>-->
+                        <!--</accordion>-->
+                    <!--</div>-->
+                    <!--<div ng-switch-when="true">-->
+                        <!--<div ng-show="nowpayed">-->
+                            <!--<h2>Payment was completed!</h2>-->
+                            <!--<p>-->
+                                <!--Invoices and receipts for payments can be found at your Mobbr dashboards.-->
+                            <!--</p>-->
+                            <!--<p>-->
+                                <!--The recipient(s) will be notified. You may now close this window.-->
+                            <!--</p>-->
+                            <!--<p>-->
+                                <!--The buttons will be updated in a few minutes.-->
+                            <!--</p>-->
+                        <!--</div>-->
+                        <!--<div ng-show="laterpayed">-->
+                            <!--<h2>Registered for later payment!</h2>-->
+                            <!--<p>-->
+                                <!--These payments are collected <a target="_blank" href="/#/wallet">in your wallet</a>.-->
+                                <!--You can review them and make them final all at once every week or so. You may now close this window.-->
+                            <!--</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
         <!-- build:js scripts/combined.js -->
         <script src="components/angular/angular.js"></script>
@@ -216,10 +192,13 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/services/idleTimeout.js"></script>
         <script src="scripts/filters/mobbrcurrency.js"></script>
+        <script src="scripts/directives/formAutofillFix.js"></script>
         <script src="scripts/directives/decorateAmount.js"></script>
         <script src="scripts/directives/placeholder.js"></script>
-        <script src="scripts/directives/mobbrtable.js"></script>
-        <script src="scripts/controllers/LightboxController.js"></script>
+        <script src="scripts/controllers/ErrorController.js"></script>
+        <script src="scripts/controllers/LoginController.js"></script>
+        <script src="scripts/controllers/LogoutController.js"></script>
+        <script src="scripts/controllers/PaymentController.js"></script>
         <!-- endbuild -->
     </body>
 </html>

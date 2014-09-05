@@ -1,0 +1,23 @@
+<h2 ng-bind="errormessage"></h2>
+<fieldset>
+    <legend>
+        Checklist for webmasters of <span ng-bind="json['url']"></span>
+    </legend>
+    <div class="error">
+        <ul>
+            <li>
+                The syntax of the script is invalid, use a JSON-validator
+                </br>&rarr; <a target="_blank" href="http://www.jsonlint.com/">http://www.jsonlint.com/</a>
+            </li>
+            <li>
+                The schema of the script is invalid, use the Mobbr script validator
+                </br>&rarr; <a target="_blank" href="/#/validate">#/validate</a>
+            </li>
+            <li>
+                Values are out-of-range , check the specifications
+                </br>&rarr; <a target="_blank" href="http://mobbr.com/protocol.html">http://mobbr.com/protocol.html</a>
+            </li>
+        </ul>
+        Visit <a href="/#/integration">the website</a> for instructions on using the buttons and widgets.
+    </div>
+</fieldset>

@@ -1,0 +1,138 @@
+<div id="payment">
+    <ul ng-init="tab = ''">
+        <li ng-click="tab=''" ng-class="{selected:tab==''}">Payment</li>
+        <li ng-click="tab='payments'" ng-class="{selected:tab=='payments'}">Payments</li>
+        <li ng-click="tab='recievers'" ng-class="{selected:tab=='recievers'}">Recievers</li>
+    </ul>
+
+    <div ng-switch="tab">
+
+            <div ng-show="message" ng-class="{info:message.type=='info',error:message.type=='error'}">
+                <span ng-bind="message.text"></span>
+                <i ng-click="message = ''" >x</i>
+            </div>
+            <div ng-show="paymentId">
+                share this ...
+            </div>
+
+            <label>Paid on this so far</label><span ng-bind="task.result.statistics.amount_total | mobbrcurrency :task.result.statistics.amount_currency"></span>
+
+            <div ng-bind="task.result.script.message" ng-if="task.result.script.message"></div>
+
+            <a ng-href="https://mobbr.com/#/task/{{taskUrl}}" target="_blank">View this task on Mobbr</a>
+            <div ng-show="!paymentId">
+                <form name="formHolder.pledgeForm" >
+                    <form name="formHolder.loginForm" ng-submit="login()">
+                        <div ng-if="!mobbrSession.isAuthorized()">
+                            <div class="form-group">
+                                <input ng-model="loginform.username"
+                                       auto-fill-sync
+                                       class="form-control"
+                                       type="text"
+                                       name="username"
+                                       placeholder="username"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <input ng-model="loginform.password"
+                                       auto-fill-sync
+                                       class="form-control"
+                                       type="password"
+                                       name="password"
+                                       placeholder="password"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <button ng-disabled="authenticating && !authenticating.$resolved"
+                                        type="submit"
+                                        class="btn btn-block" ng-click="login()">
+                                    <i class="glyphicon mobbrloader" ng-show="!performing && authenticating && !authenticating.$resolved"></i>
+                                    Log in
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div  class="col-md-12">
+                        Make a pledge on this item
+
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <input type="text" ng-required ng-model="form.amount" placeholder="Amount">
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-control"
+                                        ng-model="currency"
+                                        name="currency_iso"
+                                        ng-required
+                                        ng-options="currency.currency_iso as currency.currency_iso for currency in currenciesMap | orderBy: 'currency_iso'"
+                                        title="the currency to which other currencies are converted when displayed">
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <input type="checkbox" ng-model="form.wantInvoices"><label>I want invoices</label>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="btn btn-primary" ng-click="performPayment()" ng-disabled="!formHolder.pledgeForm.$valid">Pledge/pay
+                                <i class="glyphicon mobbrloader" ng-show="performing && ((previewLoading && !previewLoading.$resolved) || (confirmLoading && !confirmLoading.$resolved) || (authenticating && !authenticating))"></i>
+
+                            </button>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="btn btn-default" ng-click="preview(true)" ng-disabled="!form.amount || !currency">Preview payment
+                                <i class="glyphicon mobbrloader" ng-show="!performing && previewLoading && !previewLoading.$resolved"></i>
+
+                            </button>
+                        </div>
+                    </div>
+                    <div ng-show="showPreview && !paymentId" class="col-md-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+
+                                    </th>
+                                    <th>
+                                        NAME
+                                        <div>ROLE</div>
+                                    </th>
+                                    <th>
+                                        %
+                                    </th>
+                                    <th>
+                                        AMOUNT
+                                        <div>currency</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="participant in previewScript.participants">
+                                    <td><img
+                                            ng-src="https://secure.gravatar.com/avatar/{{ participant.gravatar }}?s=50&default=https://mobbr.com/img/default-gravatar.png"
+                                            class="gravatar img-rounded"
+                                            width="50"
+                                            height="50">
+                                    </td>
+                                    <td>
+                                        {{participant.id}}
+                                        <div ng-bind="participant.role"></div>
+                                    </td>
+                                    <td ng-bind="participant['.percentage']"></td>
+                                    <td>
+                                        {{participant['.amount'] | mobbrcurrency:''}}
+                                        <div>{{previewScript['.currency']}}</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>
