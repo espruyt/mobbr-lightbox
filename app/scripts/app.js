@@ -10,36 +10,51 @@ angular.module('mobbr-lightbox', [
     'mobbrApi',
     'mobbrMsg',
     'mobbrSession',
-    'ngRoute',
+    'angularMoment',
+    'ui.router',
     'ui.bootstrap',
     'mobbr-lightbox.config',
     'mobbr-lightbox.directives',
     'mobbr-lightbox.controllers',
     'mobbr-lightbox.filters'
 
-]).config(function ($routeProvider) {
-        $routeProvider
-            .when('/login', {
-                templateUrl: 'views/login.html',
-                controller: 'LoginController'
-            })
-            .when('/hash/:hash', {
+]).config(function ($stateProvider, $urlRouterProvider) {
+
+        $stateProvider
+            .state('payment', {
+                url: '/hash/:hash',
                 templateUrl: 'views/payment.html',
                 controller: 'PaymentController'
             })
-            .when('/logout', {
+            .state('payment.login', {
+                url: '/login',
+                templateUrl: 'views/login.html',
+                controller: 'LoginController'
+            })
+            .state('payment.payments', {
+                url: '/payments',
+                templateUrl: 'views/payments.html',
+                controller: 'PaymentsController'
+            })
+            .state('payment.receivers', {
+                url: '/receivers',
+                templateUrl: 'views/receivers.html',
+                controller: 'ReceiversController'
+            })
+            .state('logout', {
+                url: '/logout',
                 controller: 'LogoutController',
                 templateUrl: 'views/logout.html'
             })
-            .when('/error/:error', {
+            .state('error', {
+                url: '/error/:error',
                 controller: 'ErrorController',
                 templateUrl: 'views/error.html'
-            })
-            .otherwise({
-                redirectTo: '/error/nohash'
             });
 
-    }).run(function ($http, $rootScope, $route, $location, $window, MobbrApi, MobbrUser, environment, mobbrSession, MobbrBalance) {
+        $urlRouterProvider.otherwise('/error/nohash');
+
+    }).run(function ($http, $rootScope, $state, $location, $window, MobbrApi, MobbrUser, environment, mobbrSession, MobbrBalance) {
 
             if (mobbrSession.isAuthorized()) {
                 MobbrBalance.get(function (response) {
@@ -53,6 +68,7 @@ angular.module('mobbr-lightbox', [
             }
 
             $rootScope.mobbrSession = mobbrSession;
+            $rootScope.$state = $state;
 
             $rootScope.logout = function () {
                 MobbrUser.logout();
