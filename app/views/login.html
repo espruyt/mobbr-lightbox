@@ -1,1 +1,51 @@
-<div></div>
+<div class="page">
+    <form name="login_form" ng-submit="login(username, password)" ng-show="mobbrSession && !mobbrSession.isAuthorized()">
+        <fieldset class="form-group">
+            <div class="col-xs-12">
+                <input ng-model="username"
+                       auto-fill-sync
+                       class="form-control"
+                       type="text"
+                       name="username"
+                       placeholder="username"
+                       required>
+            </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <div class="col-xs-12">
+                <input ng-model="password"
+                       auto-fill-sync
+                       class="form-control"
+                       type="password"
+                       name="password"
+                       placeholder="password"
+                       required>
+            </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <div class="col-xs-12">
+                <button ng-disabled="authenticating && !authenticating.$resolved"
+                        class="btn btn-block btn-success"
+                        type="submit">
+                    Log in
+                </button>
+            </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <div class="col-xs-12">
+                Recover password
+            </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <div class="col-xs-12">
+                <button ng-disabled="authenticating && !authenticating.$resolved"
+                        class="btn btn-block btn-success">
+                    Register me now
+                </button>
+            </div>
+        </fieldset>
+    </form>
+    <div ng-show="mobbrSession && mobbrSession.isAuthorized()" class="col-xs-12">
+        Logged in as {{ $mobbrStorage.user.username }}, click <a ng-click="logout()">here</a> to logout
+    </div>
+</div>
