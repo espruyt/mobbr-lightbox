@@ -60,12 +60,12 @@
 
         <div ng-bind="task.result.script.message" ng-if="task.result.script.message"></div>
 
-        <a ng-href="https://mobbr.com/#/task/{{taskUrl}}" class="btn btn-primary btn-block" target="_blank">View this task on Mobbr</a>
+        <a ng-href="{{ uiUrl }}/#/task/{{ taskUrl }}" class="btn btn-primary btn-block" target="_blank">View this task on Mobbr</a>
         <form name="formHolder.pledgeForm" ng-show="!paymentId">
             <div>
                 Make a pledge on this item
 
-                <fieldset ng-disabled="!task.$resolved || payment || previewLoading.$resolved">
+                <fieldset ng-disabled="!task.$resolved || paymentId || (showPreview && !paymentId)">
                     <div class="row">
                         <div class="col-xs-6">
                             <select class="form-control"
@@ -102,7 +102,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <button class="btn btn-success btn-block" ng-click="preview(true)" ng-disabled="(!amount || !currency) || previewLoading.$resolved">Preview payment
+                        <button class="btn btn-success btn-block" ng-click="preview(true)" ng-disabled="(!amount || !currency) || (showPreview && !paymentId)">Preview payment
                             <i class="glyphicon mobbrloader" ng-show="!performing && previewLoading && !previewLoading.$resolved"></i>
                         </button>
                     </div>

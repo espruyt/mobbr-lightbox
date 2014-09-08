@@ -54,7 +54,7 @@ angular.module('mobbr-lightbox', [
 
         $urlRouterProvider.otherwise('/error/nohash');
 
-    }).run(function ($http, $rootScope, $state, $location, $window, MobbrApi, MobbrUser, environment, mobbrSession, MobbrBalance) {
+    }).run(function ($http, $rootScope, $state, $location, $window, MobbrApi, MobbrUser, environment, mobbrSession, MobbrBalance, uiUrl) {
 
             if (mobbrSession.isAuthorized()) {
                 MobbrBalance.get(function (response) {
@@ -69,6 +69,7 @@ angular.module('mobbr-lightbox', [
 
             $rootScope.mobbrSession = mobbrSession;
             $rootScope.$state = $state;
+            $rootScope.uiUrl = uiUrl;
 
             $rootScope.logout = function () {
                 MobbrUser.logout();

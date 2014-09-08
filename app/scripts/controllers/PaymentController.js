@@ -1,5 +1,5 @@
 angular.module('mobbr-lightbox.controllers')
-    .controller('PaymentController', function ($scope, $location, $state, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession) {
+    .controller('PaymentController', function ($scope, $location, $state, $window, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession) {
         'use strict';
 
         $scope.form = {};
@@ -29,6 +29,7 @@ angular.module('mobbr-lightbox.controllers')
                 url = $scope.query;
             }
             $scope.url = url;
+            $scope.taskUrl = $window.btoa(url);
         }, handleMessage);
 
 
@@ -45,9 +46,7 @@ angular.module('mobbr-lightbox.controllers')
         $scope.preview = function (showPreview, callBack) {
             $scope.showPreview = false;
             var currency = $scope.currency && $scope.currency.currency_iso || $scope.currency;
-            console.log(currency, $scope.amount);
             if ($scope.amount && currency) {
-                console.log('ladun');
                 $scope.previewLoading = MobbrPayment.preview({
                     data: $scope.url,
                     currency: currency,

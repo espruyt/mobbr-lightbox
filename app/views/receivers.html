@@ -1,5 +1,5 @@
 <div class="row page">
-    <table class="table">
+    <table ng-show="payments.receivers.length > 0" class="table">
         <thead class="hidden">
         <tr>
             <th>
@@ -34,4 +34,7 @@
         </tr>
         </tbody>
     </table>
+    <div ng-show="receivers.result.length == 0">
+        No payments yet
+    </div>
 </div>

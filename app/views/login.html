@@ -33,15 +33,17 @@
         </fieldset>
         <fieldset class="form-group">
             <div class="col-xs-12">
-                Recover password
+                <a ng-href="{{ uiUrl }}/#/recover" target="_blank">Recover password</a>
             </div>
         </fieldset>
         <fieldset class="form-group">
             <div class="col-xs-12">
-                <button ng-disabled="authenticating && !authenticating.$resolved"
-                        class="btn btn-block btn-success">
+                <a ng-href="{{ uiUrl }}/join"
+                   ng-disabled="authenticating && !authenticating.$resolved"
+                   target="_blank"
+                   class="btn btn-block btn-success">
                     Register me now
-                </button>
+                </a>
             </div>
         </fieldset>
     </form>
