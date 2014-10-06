@@ -54,22 +54,21 @@ angular.module('mobbr-lightbox', [
 
         $urlRouterProvider.otherwise('/error/nohash');
 
-    }).run(function ($http, $rootScope, $state, $location, $window, MobbrApi, MobbrUser, environment, mobbrSession, MobbrBalance, uiUrl) {
-
-            if (mobbrSession.isAuthorized()) {
-                MobbrBalance.get(function (response) {
-                    $rootScope.userCurrencies = response.result.balances;
-                    if($rootScope.userCurrencies && $rootScope.userCurrencies[0]) {
-                        $rootScope.currency = $rootScope.userCurrencies[0].currency_iso;
-                    }
-                });
-            } else {
-                $rootScope.currency = 'EUR';
-            }
+    }).run(function ($http, $rootScope, $state, $location, $window, MobbrApi, MobbrUser, environment, mobbrSession, MobbrBalance, uiUrl, filterFilter) {
 
             $rootScope.mobbrSession = mobbrSession;
             $rootScope.$state = $state;
             $rootScope.uiUrl = uiUrl;
+
+        function setCurrencies() {
+            if (mobbrSession.isAuthorized()) {
+                MobbrBalance.get(function (response) {
+                    $rootScope.userCurrencies = response.result.balances;
+                });
+            } else {
+                $rootScope.userCurrencies = $rootScope.networkCurrencies;
+            }
+        }
 
             $rootScope.logout = function () {
                 MobbrUser.logout();
@@ -80,6 +79,16 @@ angular.module('mobbr-lightbox', [
                     $window.parent.postMessage(user && [ user.username, user.email ].join('|') || 'logout', '*');
                 }
             });
+
+        $rootScope.currencies = MobbrApi.currencies(function (response) {
+            $rootScope.networkCurrencies = filterFilter($rootScope.currencies.result, { wallet_support: true });
+            response.result.forEach(function (item) {
+                $rootScope.currenciesMap[item.currency_iso] = item;
+            });
+            setCurrencies();
+        });
+
+        $rootScope.$on('mobbrApi:authchange', setCurrencies);
 
             $rootScope.linkUrl = function (url) {
                 return '/#/url/' + window.btoa(url);
