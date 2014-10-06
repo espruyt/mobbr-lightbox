@@ -7437,6 +7437,12 @@ table {
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003132}}
+td.username {
+  word-wrap: break-word;
+  max-width: 100px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003137}}
 .table > tbody > tr > td {
   border-top: 1px solid #161c22;
   font-size: 12px;
