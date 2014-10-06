@@ -60,6 +60,10 @@ angular.module('mobbr-lightbox', [
             $rootScope.$state = $state;
             $rootScope.uiUrl = uiUrl;
 
+        $rootScope.$on('$stateChangeSuccess', function () {
+            $window._gaq.push(['_trackPageView', $location.path()]);
+        });
+
         function setCurrencies() {
             if (mobbrSession.isAuthorized()) {
                 MobbrBalance.get(function (response) {
