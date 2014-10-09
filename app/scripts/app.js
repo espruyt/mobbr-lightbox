@@ -82,6 +82,21 @@ angular.module('mobbr-lightbox', [
             }
         }
 
+        function listener(event) {
+            if (event.data.url.indexOf(event.origin) === -1) {
+                return;
+            } else {
+                $rootScope.script = event.data;
+            }
+        }
+
+        if (window.addEventListener){
+            addEventListener('message', listener, false)
+        } else {
+            attachEvent('onmessage', listener)
+        }
+
+
         $rootScope.$on('mobbrApi:authchange', function (e, user) {
             if ($window.parent && $window.parent.postMessage) {
                 $window.parent.postMessage(user && [ user.username, user.email ].join('|') || 'logout', '*');

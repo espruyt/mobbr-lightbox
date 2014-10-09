@@ -1,5 +1,5 @@
 angular.module('mobbr-lightbox.controllers')
-    .controller('PaymentController', function ($scope, $location, $state, $window, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession) {
+    .controller('PaymentController', function ($scope, $rootScope, $location, $state, $window, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession) {
         'use strict';
 
         $scope.form = {};
@@ -21,7 +21,8 @@ angular.module('mobbr-lightbox.controllers')
             }
         }
 
-        var url = window.atob($state.params.hash);
+        var url = $rootScope.script || window.atob($state.params.hash);
+
         $scope.task = MobbrUri.info({ url: url }, function (response) {
 
             if (response.result.script && response.result.script.url && response.result.script.url !== url) {
