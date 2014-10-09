@@ -49,7 +49,7 @@ angular.module('mobbr-lightbox.controllers')
             var currency = $scope.currency && $scope.currency.currency_iso || $scope.currency;
             if ($scope.amount && currency) {
                 $scope.previewLoading = MobbrPayment.preview({
-                    data: $scope.url,
+                    data: $rootScope.script || $scope.url,
                     currency: currency,
                     amount: $scope.amount,
                     invoiced: $scope.wantInvoices
