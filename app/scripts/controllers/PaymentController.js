@@ -66,13 +66,6 @@ angular.module('mobbr-lightbox.controllers')
             $scope.preview(false, confirm);
         }
 
-        $scope.login = function (username, password) {
-            $scope.authenticating = MobbrUser.passwordLogin({ username: username, password: password }, handleMessage, handleMessage).then(function () {
-                $state.go('payment');
-            });
-        };
-
-
         $scope.performPayment = function () {
             $scope.performing = true;
             if ($scope.formHolder.pledgeForm && $scope.formHolder.pledgeForm.$valid) {
