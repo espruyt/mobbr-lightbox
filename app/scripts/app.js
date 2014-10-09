@@ -38,8 +38,7 @@ angular.module('mobbr-lightbox', [
             })
             .state('logout', {
                 url: '/logout',
-                templateUrl: 'views/logout.html',
-                controller: 'LoginController'
+                controller: 'LogoutController'
             })
             .state('payment.payments', {
                 url: '/payments',
@@ -82,12 +81,6 @@ angular.module('mobbr-lightbox', [
                 $rootScope.userCurrencies = $rootScope.networkCurrencies;
             }
         }
-
-        $rootScope.logout = function () {
-            MobbrUser.logout().$promise.then(function () {
-                $state.go('payment.login');
-            });
-        };
 
         $rootScope.$on('mobbrApi:authchange', function (e, user) {
             if ($window.parent && $window.parent.postMessage) {

@@ -48,6 +48,6 @@
         </fieldset>
     </form>
     <div ng-show="mobbrSession && mobbrSession.isAuthorized()" class="col-xs-12">
-        Logged in as {{ $mobbrStorage.user.username }}, click <a ng-click="logout()">here</a> to logout
+        Logged in as {{ $mobbrStorage.user.username }}, click <a ui-sref="logout">here</a> to logout
     </div>
 </div>
