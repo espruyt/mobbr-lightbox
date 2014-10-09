@@ -83,7 +83,7 @@ angular.module('mobbr-lightbox', [
         }
 
         function listener(event) {
-            if (event.data.url.indexOf(event.origin) === -1) {
+            if (event.data && event.data.url.indexOf(event.origin) === -1) {
                 return;
             } else {
                 $rootScope.script = event.data;
