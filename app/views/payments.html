@@ -1,0 +1,39 @@
+<div class="row page">
+    <table ng-show="payments.result.length > 0" class="table">
+        <thead class="hidden">
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                NAME
+                <div>TIME</div>
+            </th>
+            <th>
+                AMOUNT
+                <div>currency</div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="payment in payments.result">
+            <td>
+                <img ng-src="https://secure.gravatar.com/avatar/{{ payment.senders[0].gravatar }}?s=50&default=https://mobbr.com/img/default-gravatar.png"
+                     width="50"
+                     height="50">
+            </td>
+            <td class="username">
+                {{payment.senders[0].username}}
+                <time am-time-ago="payment.datetime"></time>
+            </td>
+            <td>
+                {{payment['amount'] | mobbrcurrency:''}}
+                <div>{{payment['currency_iso']}}</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div ng-show="payments.result.length == 0">
+        No payments yet
+    </div>
+</div>

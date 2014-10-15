@@ -1,0 +1,40 @@
+<div class="row page">
+    <table ng-show="payments.receivers.length > 0" class="table">
+        <thead class="hidden">
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                NAME
+                <div>TIME</div>
+            </th>
+            <th>
+                AMOUNT
+                <div>currency</div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="receiver in receivers.result">
+            <td>
+                <img ng-src="https://secure.gravatar.com/avatar/{{ receiver.gravatar }}?s=50&default=https://mobbr.com/img/default-gravatar.png"
+                     width="50"
+                     height="50">
+            </td>
+            <td class="username">
+                {{receiver.username}}
+                <div ng-bind="receiver.role"></div>
+            </td>
+            <td ng-bind="(receiver['share_average'] | number : 0) + '%'"></td>
+            <td>
+                {{receiver['amount'] | mobbrcurrency:''}}
+                <div>{{receiver['currency_iso']}}</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div ng-show="receivers.result.length == 0">
+        No payments yet
+    </div>
+</div>

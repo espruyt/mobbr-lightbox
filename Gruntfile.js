@@ -238,7 +238,8 @@ module.exports = function (grunt) {
             dest: '<%= yeoman.dist %>',
             src: [
               '*.{ico,txt,js}',
-              '.htaccess'
+              '.htaccess',
+              'fonts/*.*'
             ]
           }
         ]
@@ -255,52 +256,60 @@ module.exports = function (grunt) {
         ]
       }
     },
-    ngconstant: {
-      test: [
-        {
-          dest: '<%= yeoman.app %>/scripts/config.js',
-          name: 'mobbr-lightbox.config',
-          wrap: '(function() { \n return <%= __ngModule %> \n\n})();',
-          constants: {
-            'apiUrl': 'https://test-api.mobbr.com',
-            'environment': 'test'
-          }
-        }
-      ],
-      stage: [
-        {
-          dest: '<%= yeoman.app %>/scripts/config.js',
-          name: 'mobbr-lightbox.config',
-          wrap: '(function() { \n return <%= __ngModule %> \n\n})();',
-          constants: {
-            'apiUrl': 'https://stage-api.mobbr.com',
-            'environment': 'stage'
-          }
-        }
-      ],
-      production: [
-        {
-          dest: '<%= yeoman.app %>/scripts/config.js',
-          name: 'mobbr-lightbox.config',
-          wrap: '(function() { \n return <%= __ngModule %> \n\n})();',
-          constants: {
-            'apiUrl': 'https://api.mobbr.com',
-            'environment': 'production'
-          }
-        }
-      ],
-      dev: [
-        {
-          dest: '<%= yeoman.app %>/scripts/config.js',
-          name: 'mobbr-lightbox.config',
-          wrap: '(function() { \n return <%= __ngModule %> \n\n})();',
-          constants: {
-            'apiUrl': 'http://api.mobbr.dev',
-            'environment': 'development'
-          }
-        }
-      ]
-    },
+      ngconstant: {
+          test: [
+              {
+                  dest: '<%= yeoman.app %>/scripts/config.js',
+                  name: 'mobbr-lightbox.config',
+                  wrap: '(function() { \n return <%= __ngModule %> \n\n})();',
+                  constants: {
+                      lightboxUrl: 'https://test-www.mobbr.com/lightbox/#',
+                      uiUrl: 'https://test-www.mobbr.com',
+                      apiUrl: 'https://test-api.mobbr.com',
+                      environment: 'test'
+                  }
+              }
+          ],
+          stage: [
+              {
+                  dest: '<%= yeoman.app %>/scripts/config.js',
+                  name: 'mobbr-lightbox.config',
+                  wrap: '(function() { \n return <%= __ngModule %> \n\n})();',
+                  constants: {
+                      lightboxUrl: 'https://stage-www.mobbr.com/lightbox/#',
+                      uiUrl: 'https://stage-www.mobbr.com',
+                      apiUrl: 'https://stage-api.mobbr.com',
+                      environment: 'stage'
+                  }
+              }
+          ],
+          production: [
+              {
+                  dest: '<%= yeoman.app %>/scripts/config.js',
+                  name: 'mobbr-lightbox.config',
+                  wrap: '(function() { \n return <%= __ngModule %> \n\n})();',
+                  constants: {
+                      lightboxUrl: 'https://mobbr.com/lightbox/#',
+                      uiUrl: 'https://mobbr.com',
+                      apiUrl: 'https://api.mobbr.com',
+                      environment: 'production'
+                  }
+              }
+          ],
+          dev: [
+              {
+                  dest: '<%= yeoman.app %>/scripts/config.js',
+                  name: 'mobbr-lightbox.config',
+                  wrap: '(function() { \n return <%= __ngModule %> \n\n})();',
+                  constants: {
+                      'lightboxUrl': 'http://mobbr.dev:9000/#',
+                      'uiUrl': 'http://mobbr.dev:9001',
+                      'apiUrl': 'http://api.mobbr.dev',
+                      'environment': 'development'
+                  }
+              }
+          ]
+      },
     sshconfig: {
       test: {
         host: 'test-www.mobbr.com',

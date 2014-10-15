@@ -1,0 +1,153 @@
+<header class="navbar navbar-fixed-top navbar-default" role="navigation">
+    <div class="container lightbox">
+        <div class="row expand-pad">
+            <div class="col-xs-12">
+                <a ng-href="state.href('main')" class="logo text-right">
+                    <img src="img/logo-mobbr.png">
+                </a>
+            </div>
+
+            <ul class="nav menu">
+                <li ng-class="{ 'active': $state.is('payment') }">
+                    <a ng-href="{{ $state.href('payment') }}" class="text-center">
+                        <span class="glyphicon glyphicon-bullhorn"></span>
+                        <small>Payment</small>
+                    </a>
+                </li>
+                <li ng-class="{ 'active': $state.is('payment.payments') }">
+                    <a ng-href="{{ $state.href('payment.payments') }}" class="text-center">
+                        <span class="glyphicon glyphicon-tasks"></span>
+                        <small>Payments</small>
+                    </a>
+                </li>
+                <li ng-class="{ 'active': $state.is('payment.receivers') }">
+                    <a ng-href="{{ $state.href('payment.receivers') }}" class="text-center">
+                        <span class="glyphicon glyphicon-transfer"></span>
+                        <small>Receivers</small>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav menu pull-right">
+                <li ng-class="{ 'active': $state.is('payment.login') }">
+                    <a ng-href="{{ $state.href('payment.login') }}" class="text-center">
+                        <img ng-show="mobbrSession && mobbrSession.isAuthorized()" ng-src="{{ $mobbrStorage.user.thumbnail }}" class=user-thumb width="50" height="50">
+                                <span ng-show="mobbrSession && !mobbrSession.isAuthorized()">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <small>Login</small>
+                                </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<div ui-view></div>
+
+<div class="row">
+    <div ng-show="$state.is('payment')" id="payment" class="page col-xs-12">
+        <div ng-show="message" ng-class="{info:message.type=='info',error:message.type=='error'}">
+            <span ng-bind="message.text"></span>
+            <i ng-click="message = ''" >x</i>
+        </div>
+        <div ng-show="paymentId">
+            share this ...
+        </div>
+
+        <label>Paid on this so far</label>
+        <span ng-bind="task.result.statistics.amount_total | mobbrcurrency :task.result.statistics.amount_currency"></span>
+
+        <div ng-bind="task.result.script.message" ng-if="task.result.script.message"></div>
+
+        <a ng-href="{{ uiUrl }}/#/task/{{ taskUrl }}/view" class="btn btn-primary btn-block" target="_blank">View this task on Mobbr</a>
+        <form name="formHolder.pledgeForm" ng-show="!paymentId">
+            <div>
+                Make a pledge on this item
+
+                <fieldset ng-disabled="!task.$resolved || paymentId || (showPreview && !paymentId)">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <select class="form-control"
+                                    required
+                                    ng-init="currency = $mobbrStorage.user.currency_iso || 'EUR'"
+                                    ng-model="currency"
+                                    ng-options="curr.currency_iso as curr.currency_iso for curr in userCurrencies"></select>
+                        </div>
+                        <div class="col-xs-6">
+                            <input class="form-control"
+                                   required
+                                   type="number"
+                                   ng-model="amount"
+                                   step="any"
+                                   min="0"
+                                   max="1000000000">
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="form.wantInvoices">
+                                    I want invoices
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button class="btn btn-primary btn-block" ng-click="performPayment()" ng-disabled="!formHolder.pledgeForm.$valid">Pledge/pay
+                            <i class="glyphicon mobbrloader" ng-show="performing && ((previewLoading && !previewLoading.$resolved) || (confirmLoading && !confirmLoading.$resolved) || (authenticating && !authenticating))"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button class="btn btn-success btn-block" ng-click="preview(true)" ng-disabled="(!amount || !currency) || (showPreview && !paymentId)">Preview payment
+                            <i class="glyphicon mobbrloader" ng-show="!performing && previewLoading && !previewLoading.$resolved"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div ng-show="showPreview && !paymentId" class="page">
+        <table class="table">
+            <thead class="hidden">
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    NAME
+                </th>
+                <th>
+                    %
+                </th>
+                <th>
+                    AMOUNT
+                    <div>currency</div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="participant in previewScript.participants">
+                <td>
+                    <img ng-src="https://secure.gravatar.com/avatar/{{ participant['.gravatar'] }}?s=50&default=https://mobbr.com/img/default-gravatar.png"
+                         width="50"
+                         height="50">
+                </td>
+                <td class="username">
+                    {{participant['id']}}
+                    <div ng-bind="participant.role"></div>
+                </td>
+                <td ng-bind="(participant['.percentage'] | number : 0) + '%'"></td>
+                <td>
+                    {{participant['.amount'] | mobbrcurrency:''}}
+                    <div>{{previewScript['.currency']}}</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

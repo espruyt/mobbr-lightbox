@@ -1,94 +1,142 @@
 body {
-  min-height: 200px;
-  font-family: 'Open Sans';
-  margin: 0 20px;
-  padding: 0;
+  background: $darkgray;
+  color: $white;
+  font-family: $mobbrFont;
+  padding-top: $navbar-height;
+}
+
+.lightbox {
+}
+
+.navbar-fixed-top {
+  border: 0;
+
+  .menu li a {
+    float: left;
+    width: 60px;
+    margin-right: 1px;
+    padding: 15px 0 3px 0;
+    color: $dullgray;
+    background: $tabgray;
+  }
+
+  .menu li a:hover {
+    color: $dullgray;
+  }
+
+  .logo img {
+    margin: $grid-gutter-width;
+    margin-top: 13px;
+    margin-bottom: 13px;
+    background: $mobbrblue;
+  }
+
+  .row.expand-pad [class*='col-'] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .row.expand-pad {
+    margin-left: -$grid-gutter-width / 2;
+    margin-right: -$grid-gutter-width / 2;
+  }
+
+  .user {
+    padding: 5px;
+  }
+
+  .loggedin-msg {
+    display: block;
+  }
+
+  .menu.nav:before, .menu.nav:after {
+    content: none;
+  }
+
+  .menu li.active a {
+    color: $white;
+    background: $activegray;
+  }
+
+  .user-icon {
+    display: block;
+  }
+
+  .user-col {
+    float: right;
+    width: 60px;
+    border-left: 1px solid #000;
+    border-top: 1px solid #000;
+
+    a:hover {
+      background: transparent;
+    }
+  }
+
+  .menu li a,
+  .user-icon {
+    line-height: 0px;
+
+    .glyphicon {
+      display: block;
+      font-size: 25px;
+    }
+
+    small {
+      font-size: .6em;
+      text-transform: uppercase;
+      line-height: 17px;
+    }
+  }
+
+  .user-thumb {
+    margin-top: -10px;
+    margin-bottom: 2px;
+  }
+}
+
+.page {
+  background: $activegray;
+}
+
+.error {
+  color: #000;
+  margin-left: -$grid-gutter-width / 2;
+  margin-right: -$grid-gutter-width / 2;
+  padding: $grid-gutter-width;
+  background: $mobbrcallout;
+  line-height: 16px;
   font-size: 12px;
-  background: url(https://mobbr.com/img/mobbrband.png) no-repeat top left;
 }
 
-.loading {
-  background: url(https://mobbr.com/img/mobbrloader.gif) no-repeat center center;
+table {
+  font-family: $mobbrFontCondensed;
 }
 
-.loading .wrapper {
-  display: none;
+.table {
+
+  tr > td:first-child {
+    border-right: 1px solid $darkgray;
+    width: 60px;
+  }
+
+  tr > td:last-child {
+    text-align: right;
+  }
+
+  time {
+    display: block;
+  }
 }
 
-.wrapper {
-  margin: 80px 0 20px 0;
+td.username {
+  word-wrap: break-word;
+  max-width: 100px;
 }
 
-.accordion-heading .headlabel {
-  display: inline-block;
-  width: 70px;
+.table > tbody > tr > td {
+  border-top: 1px solid $darkgray;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 5px;
 }
-
-.nowrap-header .accordion-heading,
-.nowrap {
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.gravatar-heading {
-  display: inline-block;
-  margin: -5px 0 -8px 0;
-}
-
-.gravatar-heading img {
-  margin: -3px 0 0 0;
-  height: 20px;
-}
-
-h2 {
-  font-family: 'Open Sans Condensed';
-  font-weight: normal;
-  border-bottom: 1px solid #009ee0;
-  padding: 0 0 5px 0;
-  margin: 5px 0;
-}
-
-.gravatar {
-  width: 30px;
-}
-
-.mobbrloader {
-  background-image: url(https://mobbr.com/img/mobbrloader.gif);
-  background-size: cover;
-}
-
-.itemtitle {
-  padding: 0 0 0 5px;
-}
-
-.mobbr-test {
-  background-color: #FF0 !important;
-}
-
-/*#login_form {
-  padding: 0 0 10px 0;
-  border-bottom: 1px solid #009ee0;
-}
-
-#newuser {
-  margin-top:5px;
-  font-size:.95em;
-  margin-left:10px;
-}
-
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-
-
-.loading .wrapper {
-  display: none;
-}
-
-.loginerror {
-  font-weight: bold;
-  color: red;
-}*/
