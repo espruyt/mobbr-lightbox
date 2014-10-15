@@ -38,7 +38,7 @@
         </fieldset>
         <fieldset class="form-group">
             <div class="col-xs-12">
-                <a ng-href="{{ uiUrl }}/join"
+                <a ng-href="{{ uiUrl }}/#/join"
                    ng-disabled="authenticating && !authenticating.$resolved"
                    target="_blank"
                    class="btn btn-block btn-success">
@@ -48,6 +48,6 @@
         </fieldset>
     </form>
     <div ng-show="mobbrSession && mobbrSession.isAuthorized()" class="col-xs-12">
-        Logged in as {{ $mobbrStorage.user.username }}, click <a ng-click="logout()">here</a> to logout
+        Logged in as {{ $mobbrStorage.user.username }}, click <a ui-sref="logout">here</a> to logout
     </div>
 </div>

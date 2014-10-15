@@ -31,6 +31,15 @@ angular.module('mobbr-lightbox', [
                 templateUrl: 'views/login.html',
                 controller: 'LoginController'
             })
+            .state('login', {
+                url: '/login',
+                templateUrl: 'views/login.html',
+                controller: 'LoginController'
+            })
+            .state('logout', {
+                url: '/logout',
+                controller: 'LogoutController'
+            })
             .state('payment.payments', {
                 url: '/payments',
                 templateUrl: 'views/payments.html',
@@ -41,10 +50,9 @@ angular.module('mobbr-lightbox', [
                 templateUrl: 'views/receivers.html',
                 controller: 'ReceiversController'
             })
-            .state('logout', {
+            .state('payment.logout', {
                 url: '/logout',
-                controller: 'LogoutController',
-                templateUrl: 'views/logout.html'
+                controller: 'LogoutController'
             })
             .state('error', {
                 url: '/error/:error',
@@ -74,15 +82,26 @@ angular.module('mobbr-lightbox', [
             }
         }
 
-            $rootScope.logout = function () {
-                MobbrUser.logout();
-            };
+        function listener(event) {
+            if (event.data && event.data.url.indexOf(event.origin) === -1) {
+                return;
+            } else {
+                $rootScope.script = event.data;
+            }
+        }
 
-            $rootScope.$on('mobbrApi:authchange', function (e, user) {
-                if ($window.parent && $window.parent.postMessage) {
-                    $window.parent.postMessage(user && [ user.username, user.email ].join('|') || 'logout', '*');
-                }
-            });
+        if (window.addEventListener){
+            addEventListener('message', listener, false)
+        } else {
+            attachEvent('onmessage', listener)
+        }
+
+
+        $rootScope.$on('mobbrApi:authchange', function (e, user) {
+            if ($window.parent && $window.parent.postMessage) {
+                $window.parent.postMessage(user && [ user.username, user.email ].join('|') || 'logout', '*');
+            }
+        });
 
         $rootScope.currencies = MobbrApi.currencies(function (response) {
             $rootScope.networkCurrencies = filterFilter($rootScope.currencies.result, { wallet_support: true });
