@@ -69,7 +69,7 @@ angular.module('mobbr-lightbox', [
             $rootScope.uiUrl = uiUrl;
 
         $rootScope.$on('$stateChangeSuccess', function () {
-            $window._gaq.push(['_trackPageView', $location.path()]);
+            $window.ga('send', 'pageview', { page: $location.path() });
         });
 
         function setCurrencies() {
