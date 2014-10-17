@@ -21,6 +21,9 @@ angular.module('mobbr-lightbox', [
 ]).config(function ($stateProvider, $urlRouterProvider) {
 
         $stateProvider
+            .state('main', {
+                url: '/'
+            })
             .state('payment', {
                 url: '/hash/:hash',
                 templateUrl: 'views/payment.html',
@@ -60,7 +63,7 @@ angular.module('mobbr-lightbox', [
                 templateUrl: 'views/error.html'
             });
 
-        $urlRouterProvider.otherwise('/error/nohash');
+        $urlRouterProvider.otherwise('/');
 
     }).run(function ($http, $rootScope, $state, $location, $window, MobbrApi, MobbrUser, environment, mobbrSession, MobbrBalance, uiUrl, filterFilter) {
 
@@ -68,8 +71,10 @@ angular.module('mobbr-lightbox', [
             $rootScope.$state = $state;
             $rootScope.uiUrl = uiUrl;
 
-        $rootScope.$on('$stateChangeSuccess', function () {
-            $window._gaq.push(['_trackPageView', $location.path()]);
+        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams,fromState) {
+            if (!(toState.name === 'main' && fromState.url === '^')) {
+                $window.ga('send', 'pageview', { page: $location.path() });
+            }
         });
 
         function setCurrencies() {
@@ -83,7 +88,7 @@ angular.module('mobbr-lightbox', [
         }
 
         function listener(event) {
-            if (event.data && event.data.url.indexOf(event.origin) === -1) {
+            if (!event.data.url || event.data.url && event.data.url.indexOf(event.origin) === -1) {
                 return;
             } else {
                 $rootScope.script = event.data;
