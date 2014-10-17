@@ -138,7 +138,7 @@
                          height="50">
                 </td>
                 <td class="username">
-                    {{participant['id']}}
+                    {{participant['id'] | decodeuri}}
                     <div ng-bind="participant.role"></div>
                 </td>
                 <td ng-bind="(participant['.percentage'] | number : 0) + '%'"></td>
