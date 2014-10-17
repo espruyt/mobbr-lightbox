@@ -21,6 +21,9 @@ angular.module('mobbr-lightbox', [
 ]).config(function ($stateProvider, $urlRouterProvider) {
 
         $stateProvider
+            .state('main', {
+                url: '/'
+            })
             .state('payment', {
                 url: '/hash/:hash',
                 templateUrl: 'views/payment.html',
@@ -60,7 +63,7 @@ angular.module('mobbr-lightbox', [
                 templateUrl: 'views/error.html'
             });
 
-        $urlRouterProvider.otherwise('/error/nohash');
+        $urlRouterProvider.otherwise('/');
 
     }).run(function ($http, $rootScope, $state, $location, $window, MobbrApi, MobbrUser, environment, mobbrSession, MobbrBalance, uiUrl, filterFilter) {
 
@@ -83,7 +86,7 @@ angular.module('mobbr-lightbox', [
         }
 
         function listener(event) {
-            if (event.data && event.data.url.indexOf(event.origin) === -1) {
+            if (event.data && event.data.url && event.data.url.indexOf(event.origin) === -1) {
                 return;
             } else {
                 $rootScope.script = event.data;
