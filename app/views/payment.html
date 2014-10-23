@@ -55,12 +55,14 @@
             share this ...
         </div>
 
-        <label>Paid on this so far</label>
-        <span ng-bind="task.result.statistics.amount_total | mobbrcurrency :task.result.statistics.amount_currency"></span>
+        <div ng-show="!task.$resolved" class="loader">Loading...</div>
 
-        <div ng-bind="task.result.script.message" ng-if="task.result.script.message"></div>
-
-        <a ng-href="{{ uiUrl }}/#/task/{{ taskUrl }}/view" class="btn btn-primary btn-block" target="_blank">View this task on Mobbr</a>
+        <div ng-show="task.$resolved">
+            <label>Paid on this so far</label>
+            <span ng-bind="task.result.statistics.amount_total | mobbrcurrency :task.result.statistics.amount_currency"></span>
+            <div ng-bind="task.result.script.message" ng-if="task.result.script.message"></div>
+            <a ng-href="{{ uiUrl }}/#/task/{{ taskUrl }}/view" class="btn btn-primary btn-block" target="_blank">View this task on Mobbr</a>
+        </div>
         <form name="formHolder.pledgeForm" ng-show="!paymentId">
             <div>
                 Make a pledge on this item
@@ -112,7 +114,10 @@
         </form>
     </div>
     <div ng-show="showPreview && !paymentId" class="page">
-        <table class="table">
+        <div class="col-xs-12" ng-show="!previewScript">
+            <div class="loader">Loading...</div>
+        </div>
+        <table class="table" ng-show="previewScript">
             <thead class="hidden">
             <tr>
                 <th>
