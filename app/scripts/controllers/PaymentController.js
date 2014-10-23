@@ -7,7 +7,11 @@ angular.module('mobbr-lightbox.controllers')
         $scope.formHolder = {};
 
         function handleMessage(response) {
+
             var message;
+
+            $scope.showPreview = false;
+
             if (response && response.data && response.data.message) {
                 message = response.data.message;
             } else {
@@ -45,7 +49,7 @@ angular.module('mobbr-lightbox.controllers')
         }
 
         $scope.preview = function (showPreview, callBack) {
-            $scope.showPreview = false;
+            $scope.showPreview = showPreview;
             var currency = $scope.currency && $scope.currency.currency_iso || $scope.currency;
             if ($scope.amount && currency) {
                 $scope.previewLoading = MobbrPayment.preview({
@@ -58,7 +62,6 @@ angular.module('mobbr-lightbox.controllers')
                         callBack(response.result.hash);
                     }
                     $scope.previewScript = response.result.script;
-                    $scope.showPreview = showPreview;
                 }, handleMessage);
             }
         }
