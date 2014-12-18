@@ -213,6 +213,7 @@ td.username {
   z-index: 9999;
 }
 
-.buttons .btn {
+.buttons .btn,
+.form-group {
   margin-bottom: $grid-gutter-width / 2;
 }

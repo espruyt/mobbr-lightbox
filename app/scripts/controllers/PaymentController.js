@@ -1,5 +1,5 @@
 angular.module('mobbr-lightbox.controllers')
-    .controller('PaymentController', function ($scope, $rootScope, $location, $state, $window, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession) {
+    .controller('PaymentController', function ($scope, $rootScope, $location, $state, $timeout, $window, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession) {
         'use strict';
 
         $scope.form = {};
@@ -10,18 +10,13 @@ angular.module('mobbr-lightbox.controllers')
 
             var message;
 
-            $scope.showPreview = false;
+            message = response.data && response.data.message || response.message;
 
-            if (response && response.data && response.data.message) {
-                message = response.data.message;
-            } else {
-                message = response.message;
-            }
             if (message) {
-                if (message.type === 'error') {
-                    $scope.performing = false;
-                }
-                $scope.message = message;
+                $rootScope.message = message;
+                $timeout(function () {
+                    $rootScope.message = null;
+                }, 3000);
             }
         }
 
@@ -43,10 +38,16 @@ angular.module('mobbr-lightbox.controllers')
             $scope.confirmLoading = MobbrPayment.confirm({hash: hash}, function (response) {
 
                 if (response.result && response.result.payment_id) {
-                    $scope.paymentId = response.result.payment_id;
+                    handleMessage(response);
+                    $scope.amount = null;
+                    $scope.currency = null;
+                    $state.go('payment.payments');
+                }
+            }, function (response) {
+                if (response.result && response.result.payment_id) {
                     handleMessage(response);
                 }
-            }, handleMessage);
+            });
         }
 
         $scope.preview = function (showPreview, callBack) {

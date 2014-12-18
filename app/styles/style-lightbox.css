@@ -7544,8 +7544,9 @@ td.username {
   z-index: 9999;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003216}}
-.buttons .btn {
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003217}}
+.buttons .btn,
+.form-group {
   margin-bottom: 6px;
 }
 

@@ -45,20 +45,20 @@
 
 <div class="row">
     <div ng-show="$state.is('payment')" id="payment" class="page col-xs-12">
-        <div ng-show="message" ng-class="{info:message.type=='info',error:message.type=='error'}">
+        <!--<div ng-show="message" ng-class="{info:message.type=='info',error:message.type=='error'}">
             <span ng-bind="message.text"></span>
             <i ng-click="message = ''" >x</i>
         </div>
         <div ng-show="paymentId">
             share this ...
-        </div>
+        </div>-->
 
         <div ng-show="!task.$resolved" class="loader">Loading...</div>
 
         <div class="taskMessage" ng-bind="task.result.script.message" ng-if="task.result.script.message"></div>
         <form name="formHolder.pledgeForm" ng-show="!paymentId">
             <div>
-                <fieldset ng-disabled="!task.$resolved || paymentId || (showPreview && !paymentId)">
+                <fieldset ng-disabled="!task.$resolved || paymentId || (showPreview && !paymentId) || (previewLoading && !previewLoading.$resolved) || (confirmLoading && !confirmLoading.$resolved)">
                     <div class="row">
                         <div class="col-xs-6">
                             <select class="form-control"
@@ -87,7 +87,7 @@
                     </div>
                 </fieldset>
 
-                <div class="buttons">
+                <fieldset class="buttons" ng-disabled="(previewLoading && !previewLoading.$resolved) || (confirmLoading && !confirmLoading.$resolved)">
                     <div class="row">
                         <div class="col-xs-12">
                             <button class="btn btn-success btn-block" ng-click="preview(true)" ng-show="task.result.script.type != 'pledge'" ng-disabled="(!amount || !currency) || (showPreview && !paymentId)">Preview payment
@@ -97,7 +97,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <button class="btn btn-primary btn-block" ng-click="mobbrSession.isAuthorized() && performPayment() || $state.go('payment.login')" ng-disabled="!formHolder.pledgeForm.$valid" ng-bind="mobbrSession.isAuthorized() && (task.result.script.type == 'pledge' ? 'Pledge' : 'Pay') || 'Login to pay'"></button>
+                            <button class="btn btn-primary btn-block" ng-click="mobbrSession.isAuthorized() ? performPayment() : $state.go('payment.login')" ng-disabled="!formHolder.pledgeForm.$valid" ng-bind="mobbrSession.isAuthorized() && (task.result.script.type == 'pledge' ? 'Pledge' : 'Pay') || 'Login to pay'"></button>
                         </div>
                     </div>
                     <div class="row">
@@ -105,14 +105,14 @@
                             <a ng-href="{{ uiUrl }}/#/task/{{ taskUrl }}/view" class="btn btn-primary btn-block" target="_blank">View this task on Mobbr</a>
                         </div>
                     </div>
-                </div>
+                </fieldset>
             </div>
         </form>
     </div>
+    <div class="col-xs-12" ng-show="(previewLoading && !previewLoading.$resolved) || (confirmLoading && !confirmLoading.$resolved)">
+        <div class="loader">Loading...</div>
+    </div>
     <div ng-show="$state.is('payment') && showPreview && !paymentId" class="page">
-        <div class="col-xs-12" ng-show="!previewScript">
-            <div class="loader">Loading...</div>
-        </div>
         <table class="table" ng-show="previewScript">
             <thead class="hidden">
             <tr>
