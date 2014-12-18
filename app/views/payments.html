@@ -1,7 +1,12 @@
-<div class="row page" ng-show="task.$resolved">
+<div class="row page" ng-show="task.$resolved && task.result.statistics.amount_total > 0">
     <div class="col-md-12">
         <span>Paid on this so far</span>
         <strong ng-bind="task.result.statistics.amount_total | mobbrcurrency :task.result.statistics.amount_currency"></strong>
+    </div>
+</div>
+<div class="row page" ng-show="task.$resolved && task.result.statistics.amount_total == 0">
+    <div class="col-md-12">
+        <span>No payments yet</span>
     </div>
 </div>
 <div class="row page">

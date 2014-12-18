@@ -7544,6 +7544,11 @@ td.username {
   z-index: 9999;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003216}}
+.buttons .btn {
+  margin-bottom: 6px;
+}
+
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap\/mixins\/_clearfix\.scss}line{font-family:\0000315}}
 .clearfix:before, .clearfix:after {
   content: " ";

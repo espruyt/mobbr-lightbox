@@ -6,10 +6,6 @@
             </a>
         </div>
 
-        <div class="col-xs-12">
-            <a ng-href="{{ uiUrl }}/#/task/{{ taskUrl }}/view" class="btn btn-primary btn-block" target="_blank">View this task on Mobbr</a>
-        </div>
-
         <ul class="nav menu">
             <li ng-class="{ 'active': $state.is('payment') }">
                 <a ng-href="{{ $state.href('payment') }}" class="text-center">
@@ -91,16 +87,23 @@
                     </div>
                 </fieldset>
 
-                <div class="row">
-                    <div class="col-xs-12">
-                        <button class="btn btn-success btn-block" ng-click="preview(true)" ng-show="task.result.script.type != 'pledge'" ng-disabled="(!amount || !currency) || (showPreview && !paymentId)">Preview payment
-                            <i class="glyphicon mobbrloader" ng-show="!performing && previewLoading && !previewLoading.$resolved"></i>
-                        </button>
+                <div class="buttons">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button class="btn btn-success btn-block" ng-click="preview(true)" ng-show="task.result.script.type != 'pledge'" ng-disabled="(!amount || !currency) || (showPreview && !paymentId)">Preview payment
+                                <i class="glyphicon mobbrloader" ng-show="!performing && previewLoading && !previewLoading.$resolved"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <button class="btn btn-primary btn-block" ng-click="mobbrSession.isAuthorized() && performPayment() || $state.go('payment.login')" ng-disabled="!formHolder.pledgeForm.$valid" ng-bind="mobbrSession.isAuthorized() && (task.result.script.type == 'pledge' ? 'Pledge' : 'Pay') || 'Login to pay'"></button>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button class="btn btn-primary btn-block" ng-click="mobbrSession.isAuthorized() && performPayment() || $state.go('payment.login')" ng-disabled="!formHolder.pledgeForm.$valid" ng-bind="mobbrSession.isAuthorized() && (task.result.script.type == 'pledge' ? 'Pledge' : 'Pay') || 'Login to pay'"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a ng-href="{{ uiUrl }}/#/task/{{ taskUrl }}/view" class="btn btn-primary btn-block" target="_blank">View this task on Mobbr</a>
+                        </div>
                     </div>
                 </div>
             </div>
