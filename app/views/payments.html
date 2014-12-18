@@ -1,3 +1,9 @@
+<div class="row page" ng-show="task.$resolved">
+    <div class="col-md-12">
+        <span>Paid on this so far</span>
+        <strong ng-bind="task.result.statistics.amount_total | mobbrcurrency :task.result.statistics.amount_currency"></strong>
+    </div>
+</div>
 <div class="row page">
     <table ng-show="payments.result.length > 0" class="table">
         <thead class="hidden">

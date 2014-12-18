@@ -66,9 +66,9 @@
         <script src="components/es5-shim/es5-shim.js"></script>
         <![endif]-->
         <!-- endbuild -->
-        <div class="ng-cloak messaging container-fluid">
+        <div class="ng-cloak messaging container-fluid" ng-show="message">
             <div class="container">
-                <alert ng-repeat="alert in mobbrMsg.messages" type="{{ alert.type }}" close="mobbrMsg.close($index)">{{ alert.msg }}</alert>
+                <alert ng-bind="message.text"></alert>
             </div>
         </div>
 

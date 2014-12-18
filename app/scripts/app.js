@@ -101,6 +101,17 @@ angular.module('mobbr-lightbox', [
             attachEvent('onmessage', listener)
         }
 
+        $rootScope.logout = function () {
+            MobbrUser.logout().$promise.then(function () {
+                if ($state.includes('payment')) {
+                    $state.go('payment.login');
+                } else {
+                    $state.go('login');
+                }
+
+            });
+        };
+
 
         $rootScope.$on('mobbrApi:authchange', function (e, user) {
             if ($window.parent && $window.parent.postMessage) {

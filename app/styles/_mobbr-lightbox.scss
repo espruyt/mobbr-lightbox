@@ -2,14 +2,14 @@ body {
   background: $darkgray;
   color: $white;
   font-family: $mobbrFont;
-  padding-top: $navbar-height;
 }
 
 .lightbox {
 }
 
-.navbar-fixed-top {
+.navbar-top {
   border: 0;
+  margin-bottom: 0;
 
   .menu li a {
     float: left;
@@ -115,6 +115,8 @@ table {
 
 .table {
 
+  margin-bottom: 0;
+
   tr > td:first-child {
     border-right: 1px solid $darkgray;
     width: 60px;
@@ -197,4 +199,16 @@ td.username {
   40% {
     box-shadow: 0 2.5em 0 0 $mobbrblue;
   }
+}
+
+.taskMessage {
+  margin-top: $grid-gutter-width;
+  margin-bottom: $grid-gutter-width;
+  line-height: 16px;
+}
+
+.messaging {
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
 }

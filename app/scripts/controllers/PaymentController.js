@@ -26,8 +26,9 @@ angular.module('mobbr-lightbox.controllers')
         }
 
         var url = $rootScope.script || window.atob($state.params.hash);
+        $scope.taskUrl = $state.params.hash;
 
-        $scope.task = MobbrUri.info({ url: url }, function (response) {
+        $scope.task = MobbrUri.info({ url: url, base_currency: mobbrSession.isAuthorized() && $scope.$mobbrStorage.user.currency_iso || 'EUR' }, function (response) {
 
             if (response.result.script && response.result.script.url && response.result.script.url !== url) {
                 $scope.query = response.result.script.url;
