@@ -26,7 +26,6 @@
                 {{receiver.username}}
                 <div ng-bind="receiver.role"></div>
             </td>
-            <td ng-bind="task.$resolved && ((receiver['amount'] / task.result.statistics.amount_total) * 100 | number : 0) + '%' || ''"></td>
             <td>
                 {{receiver['amount'] | mobbrcurrency:''}}
                 <div>{{ $mobbrStorage.user.currency_iso || 'EUR' }}</div>
