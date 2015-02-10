@@ -12,6 +12,7 @@
 
         <div ng-show="!task.$resolved" class="loader">Loading...</div>
 
+        <h1 ng-if="showTitle" ng-bind=task.result.script.title></h1>
         <div class="taskMessage" ng-bind="task.result.script.message" ng-if="task.result.script.message"></div>
         <form name="formHolder.pledgeForm" ng-show="!paymentId">
             <div>

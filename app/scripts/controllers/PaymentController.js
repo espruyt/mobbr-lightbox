@@ -29,6 +29,11 @@ angular.module('mobbr-lightbox.controllers')
                 $scope.query = response.result.script.url;
                 url = $scope.query;
             }
+
+            if (url !== window.parent.document.location.href) {
+                $scope.showTitle = true;
+            }
+
             $scope.url = url;
             $scope.taskUrl = $window.btoa(url);
         }, handleMessage);
