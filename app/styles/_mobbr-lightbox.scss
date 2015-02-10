@@ -11,6 +11,14 @@ h1 {
   margin: 14px 0;
 }
 
+h2 {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 14px 0;
+  line-height: 22px;
+}
+
 .navbar-top {
   border: 0;
   margin-bottom: 0;
@@ -220,4 +228,11 @@ td.username {
 .buttons .btn,
 .form-group {
   margin-bottom: $grid-gutter-width / 2;
+}
+
+.btn-bitcoin {
+  background: $white;
+  color: #000;
+  text-align: left;
+  font-size: 12px;
 }

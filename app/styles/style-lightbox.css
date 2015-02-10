@@ -7311,11 +7311,20 @@ h1 {
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000314}}
+h2 {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 14px 0;
+  line-height: 22px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000322}}
 .navbar-top {
   border: 0;
   margin-bottom: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000318}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000326}}
 .navbar-top .menu li a {
   float: left;
   width: 60px;
@@ -7324,89 +7333,89 @@ h1 {
   color: #595f64;
   background: #222a30;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000327}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000335}}
 .navbar-top .menu li a:hover {
   color: #595f64;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000331}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000339}}
 .navbar-top .logo img {
   margin: 12px;
   margin-top: 13px;
   margin-bottom: 13px;
   background: #009ee0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000338}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000346}}
 .navbar-top .row.expand-pad [class*='col-'] {
   padding-right: 0;
   padding-left: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000343}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000351}}
 .navbar-top .row.expand-pad {
   margin-left: -6px;
   margin-right: -6px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000348}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000356}}
 .navbar-top .user {
   padding: 5px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000352}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000360}}
 .navbar-top .loggedin-msg {
   display: block;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000356}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000364}}
 .navbar-top .menu.nav:before, .navbar-top .menu.nav:after {
   content: none;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000360}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000368}}
 .navbar-top .menu li.active a {
   color: #fff;
   background: #2e373d;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000365}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000373}}
 .navbar-top .user-icon {
   display: block;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000369}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000377}}
 .navbar-top .user-col {
   float: right;
   width: 60px;
   border-left: 1px solid #000;
   border-top: 1px solid #000;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000375}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000383}}
 .navbar-top .user-col a:hover {
   background: transparent;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000380}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000388}}
 .navbar-top .menu li a,
 .navbar-top .user-icon {
   line-height: 0px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000384}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000392}}
 .navbar-top .menu li a .glyphicon,
 .navbar-top .user-icon .glyphicon {
   display: block;
   font-size: 25px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000389}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000397}}
 .navbar-top .menu li a small,
 .navbar-top .user-icon small {
   font-size: .6em;
   text-transform: uppercase;
   line-height: 17px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000396}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003104}}
 .navbar-top .user-thumb {
   margin-top: -10px;
   margin-bottom: 2px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003102}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003110}}
 .page {
   background: #2e373d;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003106}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003114}}
 .error {
   color: #000;
   margin-left: -6px;
@@ -7417,36 +7426,36 @@ h1 {
   font-size: 12px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003116}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003124}}
 table {
   font-family: "Roboto Condensed", sans-serif;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003120}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003128}}
 .table {
   margin-bottom: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003124}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003132}}
 .table tr > td:first-child {
   border-right: 1px solid #161c22;
   width: 60px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003129}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003137}}
 .table tr > td:last-child {
   text-align: right;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003133}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003141}}
 .table time {
   display: block;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003138}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003146}}
 td.username {
   word-wrap: break-word;
   max-width: 100px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003143}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003151}}
 .table > tbody > tr > td {
   border-top: 1px solid #161c22;
   font-size: 12px;
@@ -7454,12 +7463,12 @@ td.username {
   padding: 5px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003150}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003158}}
 .loaderholder {
   position: relative;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003154}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003162}}
 .loader:before,
 .loader:after,
 .loader {
@@ -7472,7 +7481,7 @@ td.username {
   animation: load7 1.8s infinite ease-in-out;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003165}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003173}}
 .loader {
   margin: 2.5em auto 5em auto;
   font-size: 10px;
@@ -7482,19 +7491,19 @@ td.username {
   animation-delay: 0.16s;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003173}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003181}}
 .loader:before {
   left: -3.5em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003176}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003184}}
 .loader:after {
   left: 3.5em;
   -webkit-animation-delay: 0.32s;
   animation-delay: 0.32s;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003181}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003189}}
 .loader:before,
 .loader:after {
   content: '';
@@ -7522,24 +7531,32 @@ td.username {
     box-shadow: 0 2.5em 0 0 #009ee0;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003208}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003216}}
 .taskMessage {
   margin-top: 12px;
   margin-bottom: 12px;
   line-height: 16px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003214}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003222}}
 .messaging {
   position: fixed;
   width: 100%;
   z-index: 9999;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003220}}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003228}}
 .buttons .btn,
 .form-group {
   margin-bottom: 6px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003233}}
+.btn-bitcoin {
+  background: #fff;
+  color: #000;
+  text-align: left;
+  font-size: 12px;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap\/mixins\/_clearfix\.scss}line{font-family:\0000314}}

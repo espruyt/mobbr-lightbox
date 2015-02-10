@@ -45,7 +45,6 @@ angular.module('mobbr-lightbox.controllers')
                 if (response.result && response.result.payment_id) {
                     handleMessage(response);
                     $scope.amount = null;
-                    $scope.currency = null;
                     $state.go('payment.payments');
                 }
             }, function (response) {
