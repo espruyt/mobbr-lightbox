@@ -72,7 +72,7 @@ angular.module('mobbr-lightbox', [
             $rootScope.uiUrl = uiUrl;
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams,fromState) {
-            if (!(toState.name === 'main' && fromState.url === '^')) {
+            if (!(toState.name === 'main' && (!fromState || fromState.url === '^'))) {
                 $window.ga('send', 'pageview', { page: $location.path() });
             }
         });
@@ -88,7 +88,7 @@ angular.module('mobbr-lightbox', [
         }
 
         function listener(event) {
-            if (!event.data.url || event.data.url && event.data.url.indexOf(event.origin) === -1) {
+            if ((!event || !event.data || !event.data.url) || (event && event.data && event.data.url && event.data.url.indexOf(event.origin) === -1)) {
                 return;
             } else {
                 $rootScope.script = event.data;

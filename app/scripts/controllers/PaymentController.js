@@ -30,7 +30,7 @@ angular.module('mobbr-lightbox.controllers')
                 url = $scope.query;
             }
 
-            if (url !== window.parent.document.location.href) {
+            if (url !== window.document.referrer) {
                 $scope.showTitle = true;
             }
 

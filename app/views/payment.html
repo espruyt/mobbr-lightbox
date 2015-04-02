@@ -79,7 +79,7 @@
                             <button class="btn btn-success btn-block" ng-click="$state.go('payment.login')">Login to pay with Mobbr</button>
                         </div>
                     </div>
-                    <div class="row" ng-show="showPreview && mobbrSession.isAuthorized()">
+                    <div class="row" ng-show="(showPreview || task.result.script.type == 'pledge') && mobbrSession.isAuthorized()">
                         <div class="col-xs-12">
                             <button class="btn btn-success btn-block" ng-click="performPayment()" ng-disabled="!formHolder.pledgeForm.$valid" ng-bind="(task.result.script.type == 'pledge' ? 'Pledge' : 'Pay')"></button>
                         </div>
