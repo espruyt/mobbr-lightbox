@@ -68,7 +68,9 @@
         <!-- endbuild -->
         <div class="ng-cloak messaging container-fluid" ng-show="message">
             <div class="container">
-                <alert ng-bind="message.text"></alert>
+                <alert class="alert-{{ message.type }}">
+                    {{ message.text }}
+                </alert>
             </div>
         </div>
 

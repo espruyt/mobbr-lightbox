@@ -6,23 +6,8 @@ angular.module('mobbr-lightbox.controllers')
             $scope.authenticating = MobbrUser.passwordLogin({ username: username, password: password }).$promise.then(function () {
                 $state.go('payment');
             }, function (response) {
-                handleMessage(response);
+                $rootScope.handleMessage(response);
                 $scope.authenticating = false;
             });
         };
-
-        function handleMessage(response) {
-
-            var message;
-
-            if (response.data && response.data.message) {
-                message = response.data.message;
-            }
-            if (message) {
-                $rootScope.message = message;
-                $timeout(function () {
-                    $rootScope.message = null;
-                }, 3000);
-            }
-        }
     });

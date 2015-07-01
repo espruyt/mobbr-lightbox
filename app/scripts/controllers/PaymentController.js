@@ -6,20 +6,6 @@ angular.module('mobbr-lightbox.controllers')
         $scope.loginform = {};
         $scope.formHolder = {};
 
-        function handleMessage(response) {
-
-            var message;
-
-            message = response.data && response.data.message || response.message;
-
-            if (message) {
-                $rootScope.message = message;
-                $timeout(function () {
-                    $rootScope.message = null;
-                }, 3000);
-            }
-        }
-
         var url = $rootScope.script || window.atob($state.params.hash);
         $scope.taskUrl = $state.params.hash;
 
@@ -36,21 +22,18 @@ angular.module('mobbr-lightbox.controllers')
 
             $scope.url = url;
             $scope.taskUrl = $window.btoa(url);
-        }, handleMessage);
+        }, $rootScope.handleMessage);
 
 
         function confirm(hash) {
             $scope.confirmLoading = MobbrPayment.confirm({hash: hash}, function (response) {
-
                 if (response.result && response.result.payment_id) {
-                    handleMessage(response);
+                    $rootScope.handleMessage(response);
                     $scope.amount = null;
                     $state.go('payment.payments');
                 }
             }, function (response) {
-                if (response.result && response.result.payment_id) {
-                    handleMessage(response);
-                }
+                $rootScope.handleMessage(response);
             });
         }
 
@@ -68,9 +51,9 @@ angular.module('mobbr-lightbox.controllers')
                         callBack(response.result.hash);
                     }
                     $scope.previewScript = response.result.script;
-                }, handleMessage);
+                }, $rootScope.handleMessage);
             }
-        }
+        };
 
         function perform() {
             $scope.preview(false, confirm);
@@ -79,13 +62,7 @@ angular.module('mobbr-lightbox.controllers')
         $scope.performPayment = function () {
             $scope.performing = true;
             if ($scope.formHolder.pledgeForm && $scope.formHolder.pledgeForm.$valid) {
-                //if (mobbrSession.isAuthorized()) {
-                    perform();
-                //} else {
-                //    $scope.authenticating = MobbrUser.passwordLogin({ username: $scope.loginform.username, password: $scope.loginform.password }, function () {
-                //        perform();
-                //    }, handleMessage);
-               // }
+                perform();
             }
         };
 

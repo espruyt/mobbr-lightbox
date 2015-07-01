@@ -65,7 +65,7 @@ angular.module('mobbr-lightbox', [
 
         $urlRouterProvider.otherwise('/');
 
-    }).run(function ($http, $rootScope, $state, $location, $window, MobbrApi, MobbrUser, environment, mobbrSession, MobbrBalance, uiUrl, filterFilter) {
+    }).run(function ($http, $rootScope, $state, $timeout, $location, $window, MobbrApi, MobbrUser, environment, mobbrSession, MobbrBalance, uiUrl, filterFilter) {
 
             $rootScope.mobbrSession = mobbrSession;
             $rootScope.$state = $state;
@@ -76,6 +76,21 @@ angular.module('mobbr-lightbox', [
                 $window.ga('send', 'pageview', { page: $location.path() });
             }
         });
+
+        $rootScope.handleMessage = function (response) {
+
+            var message;
+
+            message = response.data && response.data.message || response.message;
+
+            if (message) {
+                $rootScope.message = message;
+                $rootScope.message.type = response.status[0] === 2 ? 'success' : 'danger';
+                $timeout(function () {
+                    $rootScope.message = null;
+                }, 3000);
+            }
+        };
 
         function setCurrencies() {
             if (mobbrSession.isAuthorized()) {
