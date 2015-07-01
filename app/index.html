@@ -87,7 +87,7 @@
                         <li ng-class="{ 'active': $state.is('payment') }" ng-show="!noScript">
                             <a ng-href="{{ $state.href('payment') }}" class="text-center">
                                 <span class="mobbricon mobbricon-transaction"></span>
-                                <small>Payment</small>
+                                <small>{{ scriptType || 'Pledge' }}</small>
                             </a>
                         </li>
                         <li ng-class="{ 'active': $state.is('payment.payments') }" ng-show="!noScript">

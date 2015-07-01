@@ -9,6 +9,7 @@ angular.module('mobbr-lightbox.controllers')
         $scope.formHolder = {};
         $scope.taskUrl = $state.params.hash;
         $scope.task = task;
+        $rootScope.scriptType = task.result.script.type;
 
         if (task.result.script && task.result.script.url && task.result.script.url !== url) {
             $scope.query = task.result.script.url;
