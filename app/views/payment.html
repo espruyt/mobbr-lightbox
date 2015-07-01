@@ -1,11 +1,9 @@
 <div class="row" ng-show="noScript">
     <div class="page col-xs-12">
         <h1>This URL has no Mobbr support... Yet.</h1>
-        <div class="alert alert-block alert-warning alert-noscript">
-            <p>Mobbr is a payment system for online collaboration.</p>
-            <a ng-href="{{ uiUrl + '/#/task/' + encodeTask(url) + '/script' }}" target="_blank" class="btn btn-success">Add crowd-funding and -paying now</a>
-            <h1>You can earn money on these related tasks right now</h1>
-        </div>
+        <p>Mobbr is a payment system for online collaboration.</p>
+        <a ng-href="{{ uiUrl + '/#/task/' + encodeTask(url) + '/script' }}" target="_blank" class="btn btn-success btn-block">Add crowd-funding and -paying now</a>
+        <a ng-href="{{ uiUrl + '/#/tasks/' }}" target="_blank" class="btn btn-primary btn-block">Join these tasks, earn money</a>
     </div>
 </div>
 

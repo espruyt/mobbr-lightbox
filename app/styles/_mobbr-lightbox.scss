@@ -399,10 +399,10 @@ td.username {
 }
 
 .alert-noscript {
-  margin: ($grid-gutter-width / 2) 0;
+  margin: $grid-gutter-width 0 ($grid-gutter-width / 2) 0;
 
   h1 {
-    margin-bottom: 0;
+    margin: 0;
   }
 
   .btn {
