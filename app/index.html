@@ -113,7 +113,7 @@
                     <ul class="nav menu pull-right" ng-show="$state.includes('payment')">
                         <li ng-class="{ 'active': $state.is('payment.login') }">
                             <a ng-href="{{ $state.href('payment.login') }}" class="text-center">
-                                <img ng-show="mobbrSession && mobbrSession.isAuthorized()" ng-src="{{ $mobbrStorage.user.thumbnail }}" class=user-thumb width="50" height="50">
+                                <img ng-show="mobbrSession && mobbrSession.isAuthorized()" ng-src="{{ $mobbrStorage.user.thumbnail }}" class=user-thumb width="45" height="50">
                                 <span ng-show="mobbrSession && !mobbrSession.isAuthorized()">
                                     <span class="mobbricon mobbricon-person"></span>
                                     <small>Login</small>
