@@ -127,6 +127,10 @@ angular.module('mobbr-lightbox', [
             });
         };
 
+        $rootScope.encodeTask = function (url) {
+            return $window.btoa(url);
+        };
+
 
         $rootScope.$on('mobbrApi:authchange', function (e, user) {
             if ($window.parent && $window.parent.postMessage) {
@@ -141,6 +145,10 @@ angular.module('mobbr-lightbox', [
             });
             setCurrencies();
         });
+
+        $rootScope.getLanguage = function () {
+            return $rootScope.$mobbrStorage.user && $rootScope.$mobbrStorage.user.language_iso || ($window.navigator.userLanguage || $window.navigator.language).toUpperCase();
+        }
 
         $rootScope.$on('mobbrApi:authchange', setCurrencies);
 

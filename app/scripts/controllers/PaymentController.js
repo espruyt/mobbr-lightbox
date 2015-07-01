@@ -1,5 +1,5 @@
 angular.module('mobbr-lightbox.controllers')
-    .controller('PaymentController', function ($scope, $rootScope, $location, $state, $timeout, $window, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession) {
+    .controller('PaymentController', function ($scope, $rootScope, $location, $state, $timeout, $window, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession, uiUrl) {
         'use strict';
 
         $scope.form = {};
@@ -14,11 +14,20 @@ angular.module('mobbr-lightbox.controllers')
             if (response.result.script && response.result.script.url && response.result.script.url !== url) {
                 $scope.query = response.result.script.url;
                 url = $scope.query;
+            } else {
+                $scope.noScript = true;
             }
 
             if (url !== window.document.referrer) {
                 $scope.showTitle = true;
             }
+
+            $scope.relatedTasks = MobbrUri.get({
+                keywords: response.result.metadata.keywords,
+                base_currency: mobbrSession.isAuthorized() && $scope.$mobbrStorage.user.currency_iso || 'EUR'
+            }, function (response) {
+                //console.log(response);
+            }, $rootScope.handleMessage);
 
             $scope.url = url;
             $scope.taskUrl = $window.btoa(url);
@@ -65,5 +74,7 @@ angular.module('mobbr-lightbox.controllers')
                 perform();
             }
         };
+
+        $scope.uiUrl = uiUrl;
 
     });

@@ -3326,8 +3326,8 @@ tbody.collapse.in {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../fonts/glyphicons-halflings-regular.eot");
-  src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+  src: url("../fonts/mobbricon.eot");
+  src: url("../fonts/mobbricon.eot?#iefix") format("embedded-opentype"), url("../fonts/mobbricon.woff") format("woff"), url("../fonts/mobbricon.ttf") format("truetype"), url("../fonts/mobbricon.svg#glyphicons_halflingsregular") format("svg");
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap\/_glyphicons\.scss}line{font-family:\0000325}}
 .glyphicon {
@@ -7295,6 +7295,294 @@ button.close {
   bottom: -10px;
 }
 
+@font-face {
+  font-family: 'mobbricon';
+  src: url("../fonts/mobbricon.eot");
+  src: url("../fonts/mobbricon.eot?#iefix") format("embedded-opentype"), url("../fonts/mobbricon.woff") format("woff"), url("../fonts/mobbricon.ttf") format("truetype"), url("../fonts/mobbricon.svg#glyphicons_halflingsregular") format("svg");
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000325}}
+.mobbricon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'mobbricon';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000338}}
+.mobbricon-softalert:before {
+  content: "a";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000339}}
+.mobbricon-myprofile:before {
+  content: "b";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000340}}
+.mobbricon-develop:before {
+  content: "c";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000341}}
+.mobbricon-connect:before {
+  content: "d";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000342}}
+.mobbricon-addopen:before {
+  content: "e";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000343}}
+.mobbricon-up:before {
+  content: "f";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000344}}
+.mobbricon-radio:before {
+  content: "g";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000345}}
+.mobbricon-allout:before {
+  content: "h";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000346}}
+.mobbricon-script:before {
+  content: "i";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000347}}
+.mobbricon-completed:before {
+  content: "j";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000348}}
+.mobbricon-top:before {
+  content: "k";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000349}}
+.mobbricon-done:before {
+  content: "l";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000350}}
+.mobbricon-neutral:before {
+  content: "m";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000351}}
+.mobbricon-person:before {
+  content: "n";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000352}}
+.mobbricon-down:before {
+  content: "o";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000353}}
+.mobbricon-tag:before {
+  content: "p";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000354}}
+.mobbricon-settings:before {
+  content: "q";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000355}}
+.mobbricon-updates:before {
+  content: "r";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000356}}
+.mobbricon-tasks:before {
+  content: "s";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000357}}
+.mobbricon-payments:before {
+  content: "t";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000358}}
+.mobbricon-wallet:before {
+  content: "u";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000359}}
+.mobbricon-starttask:before {
+  content: "v";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000360}}
+.mobbricon-mobbrmenu:before {
+  content: "w";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000361}}
+.mobbricon-pulldown:before {
+  content: "x";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000362}}
+.mobbricon-mobbricon:before {
+  content: "y";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000363}}
+.mobbricon-filter:before {
+  content: "z";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000364}}
+.mobbricon-checkbox:before {
+  content: "A";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000365}}
+.mobbricon-crowd:before {
+  content: "B";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000366}}
+.mobbricon-domain:before {
+  content: "C";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000367}}
+.mobbricon-hardalert:before {
+  content: "D";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000368}}
+.mobbricon-info:before {
+  content: "E";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000369}}
+.mobbricon-hardclose:before {
+  content: "F";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000370}}
+.mobbricon-pledge:before {
+  content: "G";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000371}}
+.mobbricon-receipt:before {
+  content: "H";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000372}}
+.mobbricon-twitter:before {
+  content: "I";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000373}}
+.mobbricon-facebook:before {
+  content: "J";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000374}}
+.mobbricon-google:before {
+  content: "K";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000375}}
+.mobbricon-share:before {
+  content: "L";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000376}}
+.mobbricon-mail:before {
+  content: "M";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000377}}
+.mobbricon-feedback:before {
+  content: "N";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000378}}
+.mobbricon-transaction:before {
+  content: "O";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000379}}
+.mobbricon-view:before {
+  content: "P";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000380}}
+.mobbricon-search:before {
+  content: "Q";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000381}}
+.mobbricon-preview:before {
+  content: "R";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000382}}
+.mobbricon-login:before {
+  content: "S";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000383}}
+.mobbricon-printer:before {
+  content: "T";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000384}}
+.mobbricon-download:before {
+  content: "U";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000385}}
+.mobbricon-softclose:before {
+  content: "V";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000386}}
+.mobbricon-unclaimed:before {
+  content: "W";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000387}}
+.mobbricon-video:before {
+  content: "X";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000388}}
+.mobbricon-plugin:before {
+  content: "Y";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000389}}
+.mobbricon-certified:before {
+  content: "<";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000390}}
+.mobbricon-digger:before {
+  content: ">";
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-icons\.scss}line{font-family:\0000391}}
+.mobbricon-location:before {
+  content: "}";
+}
+
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\000031}}
 body {
   background: #161c22;
@@ -7392,8 +7680,8 @@ h2 {
   line-height: 0px;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\0000392}}
-.navbar-top .menu li a .glyphicon,
-.navbar-top .user-icon .glyphicon {
+.navbar-top .menu li a .mobbricon,
+.navbar-top .user-icon .mobbricon {
   display: block;
   font-size: 25px;
 }
@@ -7557,6 +7845,176 @@ td.username {
   color: #000;
   text-align: left;
   font-size: 12px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003240}}
+.data-card-container {
+  padding: 3px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003244}}
+.data-card {
+  background: #fff;
+  color: #000;
+  padding: 24px;
+  overflow: hidden;
+  line-height: 20px;
+  position: relative;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003252}}
+.data-card .top {
+  max-height: 186px;
+  overflow: hidden;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003259}}
+.data-card h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: bold;
+  line-height: 18px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003268}}
+.data-card p {
+  font-size: 12px;
+  line-height: 18px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003273}}
+.data-card .bottom {
+  left: 24px;
+  right: 24px;
+  border-top: 1px solid #edebeb;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003279}}
+.data-card .participants {
+  color: #ff9900;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003283}}
+.data-card .amount {
+  color: #699900;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003287}}
+.data-card .tasks {
+  color: #009ee0;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003291}}
+.data-card .item {
+  line-height: 24px;
+  text-align: right;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  font-family: "Roboto Condensed", sans-serif;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003298}}
+.data-card .item .mobbricon {
+  margin-left: 6px;
+  float: right;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003304}}
+.data-card .large,
+.data-card .mobbricon {
+  font-size: 24px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003309}}
+.data-card .domain .mobbricon {
+  margin-left: 4px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003314}}
+.data-card:hover,
+.data-card-highlight {
+  background: #009ee0;
+  color: #fff;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003319}}
+.data-card:hover .item,
+.data-card-highlight .item {
+  color: #fff;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003325}}
+.tag {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 30px;
+  padding: 0 12px;
+  border-radius: 0;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  font-weight: normal;
+  font-family: "Roboto Condensed", sans-serif;
+  background: #595f64;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003337}}
+.tag .mobbricon {
+  margin: 0 4px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003342}}
+.tag.reset {
+  padding-left: 8px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003346}}
+.tag.more {
+  padding-left: 12px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003350}}
+.tag.suggested {
+  opacity: .4;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003354}}
+.tag.toptags {
+  background: #000;
+  color: #fff;
+  padding-right: 8px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003360}}
+.tag.addtag {
+  background: #edebeb;
+  color: #000;
+  padding-left: 0;
+  padding-right: 0;
+  width: 180px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003367}}
+.tag.addtag .mobbricon {
+  font-size: 18px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003371}}
+.tag.addtag input {
+  height: 50px;
+  line-height: 50px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003379}}
+.tag:hover {
+  background: #000;
+  color: #fff;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003384}}
+.tag.addtag:hover {
+  background: #edebeb;
+  color: #000;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003389}}
+.title-row {
+  padding: 0 6px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003393}}
+.grayfield {
+  background: #2e373d;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap\/mixins\/_clearfix\.scss}line{font-family:\0000314}}

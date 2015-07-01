@@ -86,19 +86,19 @@
                     <ul class="nav menu" ng-show="$state.includes('payment')">
                         <li ng-class="{ 'active': $state.is('payment') }">
                             <a ng-href="{{ $state.href('payment') }}" class="text-center">
-                                <span class="glyphicon glyphicon-bullhorn"></span>
+                                <span class="mobbricon mobbricon-transaction"></span>
                                 <small>Payment</small>
                             </a>
                         </li>
                         <li ng-class="{ 'active': $state.is('payment.payments') }">
                             <a ng-href="{{ $state.href('payment.payments') }}" class="text-center">
-                                <span class="glyphicon glyphicon-tasks"></span>
+                                <span class="mobbricon mobbricon-payments"></span>
                                 <small>Payments</small>
                             </a>
                         </li>
                         <li ng-class="{ 'active': $state.is('payment.receivers') }">
                             <a ng-href="{{ $state.href('payment.receivers') }}" class="text-center">
-                                <span class="glyphicon glyphicon-transfer"></span>
+                                <span class="mobbricon mobbricon-crowd"></span>
                                 <small>Receivers</small>
                             </a>
                         </li>
@@ -109,7 +109,7 @@
                             <a ng-href="{{ $state.href('payment.login') }}" class="text-center">
                                 <img ng-show="mobbrSession && mobbrSession.isAuthorized()" ng-src="{{ $mobbrStorage.user.thumbnail }}" class=user-thumb width="50" height="50">
                                 <span ng-show="mobbrSession && !mobbrSession.isAuthorized()">
-                                    <span class="glyphicon glyphicon-user"></span>
+                                    <span class="mobbricon mobbricon-person"></span>
                                     <small>Login</small>
                                 </span>
                             </a>
