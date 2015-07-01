@@ -14,7 +14,9 @@ angular.module('mobbr-lightbox.controllers')
             if (response.result.script && response.result.script.url && response.result.script.url !== url) {
                 $scope.query = response.result.script.url;
                 url = $scope.query;
-            } else {
+            }
+
+            if (!response.result.script) {
                 $scope.noScript = true;
             }
 
