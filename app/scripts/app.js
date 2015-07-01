@@ -163,21 +163,44 @@ angular.module('mobbr-lightbox', [
 
         $rootScope.$on('mobbrApi:authchange', setCurrencies);
 
-            $rootScope.linkUrl = function (url) {
-                return '/#/url/' + window.btoa(url);
-            }
-
-            $rootScope.isTest = function () {
-                return environment !== 'production';
-            }
-
-            $rootScope.currenciesMap = {};
-            MobbrApi.currencies(function (response) {
-                if (response.result != null) {
-                    $rootScope.currenciesMap = response.result;
-                } else if (response.message != null) {
-                }
-                $rootScope.currenciesMap['MBR'] = 'Mobbr';
-            });
+        $rootScope.linkUrl = function (url) {
+            return '/#/url/' + window.btoa(url);
         }
+
+        $rootScope.isTest = function () {
+            return environment !== 'production';
+        }
+
+        $rootScope.currenciesMap = {};
+        MobbrApi.currencies(function (response) {
+            if (response.result != null) {
+                $rootScope.currenciesMap = response.result;
+            } else if (response.message != null) {
+            }
+            $rootScope.currenciesMap['MBR'] = 'Mobbr';
+        });$rootScope.linkUrl = function (url) {
+            return '/#/url/' + window.btoa(url);
+        }
+
+        $rootScope.isTest = function () {
+            return environment !== 'production';
+        }
+
+        $rootScope.currenciesMap = {};
+        MobbrApi.currencies(function (response) {
+            if (response.result != null) {
+                $rootScope.currenciesMap = response.result;
+            } else if (response.message != null) {
+            }
+            $rootScope.currenciesMap['MBR'] = 'Mobbr';
+        });
+
+        $rootScope.$on('$stateChangeStart', function () {
+            $rootScope.loading = true;
+        });
+
+        $rootScope.$on('$stateChangeSuccess', function () {
+            $rootScope.loading = false;
+        });
+    }
 );
