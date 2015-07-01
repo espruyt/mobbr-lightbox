@@ -176,7 +176,6 @@ angular.module('mobbr-lightbox', [
                 if (response.result != null) {
                     $rootScope.currenciesMap = response.result;
                 } else if (response.message != null) {
-                    console.log('error loading currencies' + response.error.status);
                 }
                 $rootScope.currenciesMap['MBR'] = 'Mobbr';
             });

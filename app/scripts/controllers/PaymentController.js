@@ -2,37 +2,30 @@ angular.module('mobbr-lightbox.controllers')
     .controller('PaymentController', function ($scope, $rootScope, $location, $state, $timeout, $window, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession, uiUrl, task) {
         'use strict';
 
+        var url = $rootScope.script || window.atob($state.params.hash);
+
         $scope.form = {};
         $scope.loginform = {};
         $scope.formHolder = {};
-
-        var url = $rootScope.script || window.atob($state.params.hash);
         $scope.taskUrl = $state.params.hash;
-
         $scope.task = task;
 
-        console.log(task);
+        if (task.result.script && task.result.script.url && task.result.script.url !== url) {
+            $scope.query = task.result.script.url;
+            url = $scope.query;
+        }
 
-        //$scope.task = MobbrUri.info({ url: url, base_currency: mobbrSession.isAuthorized() && $scope.$mobbrStorage.user.currency_iso || 'EUR' }, function (response) {
+        if (!task.result.script || task.result.script.length === 0) {
+            $rootScope.noScript = true;
+            $state.go('payment.related');
+        }
 
-            if (task.result.script && task.result.script.url && task.result.script.url !== url) {
-                $scope.query = task.result.script.url;
-                url = $scope.query;
-            }
+        if (url !== window.document.referrer) {
+            $scope.showTitle = true;
+        }
 
-            if (!task.result.script || task.result.script.length === 0) {
-                $rootScope.noScript = true;
-                $state.go('payment.related');
-            }
-
-            if (url !== window.document.referrer) {
-                $scope.showTitle = true;
-            }
-
-            $scope.url = url;
-            $scope.taskUrl = $window.btoa(url);
-        //}, $rootScope.handleMessage);
-
+        $scope.url = url;
+        $scope.taskUrl = $window.btoa(url);
 
         function confirm(hash) {
             $scope.confirmLoading = MobbrPayment.confirm({hash: hash}, function (response) {
@@ -76,5 +69,4 @@ angular.module('mobbr-lightbox.controllers')
         };
 
         $scope.uiUrl = uiUrl;
-
     });
