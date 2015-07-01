@@ -53,7 +53,10 @@ angular.module('mobbr-lightbox.controllers')
                         callBack(response.result.hash);
                     }
                     $scope.previewScript = response.result.script;
-                }, $rootScope.handleMessage);
+                }, function (response) {
+                    $scope.showPreview = false;
+                    $rootScope.handleMessage(response);
+                });
             }
         };
 
