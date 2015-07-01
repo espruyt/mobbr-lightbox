@@ -27,7 +27,13 @@ angular.module('mobbr-lightbox', [
             .state('payment', {
                 url: '/hash/:hash',
                 templateUrl: 'views/payment.html',
-                controller: 'PaymentController'
+                controller: 'PaymentController',
+                resolve: {
+                    task: function ($rootScope, $window, $stateParams, mobbrSession, MobbrUri) {
+                        var url = $rootScope.script || $window.atob($stateParams.hash);
+                        return MobbrUri.info({ url: url, base_currency: mobbrSession.isAuthorized() && $rootScope.$mobbrStorage.user.currency_iso || 'EUR' }).$promise;
+                    }
+                }
             })
             .state('payment.login', {
                 url: '/login',
@@ -52,6 +58,11 @@ angular.module('mobbr-lightbox', [
                 url: '/receivers',
                 templateUrl: 'views/receivers.html',
                 controller: 'ReceiversController'
+            })
+            .state('payment.related', {
+                url: '/related',
+                templateUrl: 'views/related.html',
+                controller: 'RelatedController'
             })
             .state('payment.logout', {
                 url: '/logout',

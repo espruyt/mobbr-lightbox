@@ -84,22 +84,28 @@
                     </div>
 
                     <ul class="nav menu" ng-show="$state.includes('payment')">
-                        <li ng-class="{ 'active': $state.is('payment') }">
+                        <li ng-class="{ 'active': $state.is('payment') }" ng-show="!noScript">
                             <a ng-href="{{ $state.href('payment') }}" class="text-center">
                                 <span class="mobbricon mobbricon-transaction"></span>
                                 <small>Payment</small>
                             </a>
                         </li>
-                        <li ng-class="{ 'active': $state.is('payment.payments') }">
+                        <li ng-class="{ 'active': $state.is('payment.payments') }" ng-show="!noScript">
                             <a ng-href="{{ $state.href('payment.payments') }}" class="text-center">
                                 <span class="mobbricon mobbricon-payments"></span>
                                 <small>Payments</small>
                             </a>
                         </li>
-                        <li ng-class="{ 'active': $state.is('payment.receivers') }">
+                        <li ng-class="{ 'active': $state.is('payment.receivers') }" ng-show="!noScript">
                             <a ng-href="{{ $state.href('payment.receivers') }}" class="text-center">
                                 <span class="mobbricon mobbricon-crowd"></span>
                                 <small>Receivers</small>
+                            </a>
+                        </li>
+                        <li ng-class="{ 'active': $state.is('payment.related') }">
+                            <a ng-href="{{ $state.href('payment.related') }}" class="text-center">
+                                <span class="mobbricon mobbricon-digger"></span>
+                                <small>Related</small>
                             </a>
                         </li>
                     </ul>
@@ -147,6 +153,7 @@
         <script src="scripts/controllers/PaymentController.js"></script>
         <script src="scripts/controllers/PaymentsController.js"></script>
         <script src="scripts/controllers/ReceiversController.js"></script>
+        <script src="scripts/controllers/RelatedController.js"></script>
         <!-- endbuild -->
     </body>
 </html>

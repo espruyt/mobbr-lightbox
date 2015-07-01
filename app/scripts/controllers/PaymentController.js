@@ -1,5 +1,5 @@
 angular.module('mobbr-lightbox.controllers')
-    .controller('PaymentController', function ($scope, $rootScope, $location, $state, $timeout, $window, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession, uiUrl) {
+    .controller('PaymentController', function ($scope, $rootScope, $location, $state, $timeout, $window, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession, uiUrl, task) {
         'use strict';
 
         $scope.form = {};
@@ -9,31 +9,29 @@ angular.module('mobbr-lightbox.controllers')
         var url = $rootScope.script || window.atob($state.params.hash);
         $scope.taskUrl = $state.params.hash;
 
-        $scope.task = MobbrUri.info({ url: url, base_currency: mobbrSession.isAuthorized() && $scope.$mobbrStorage.user.currency_iso || 'EUR' }, function (response) {
+        $scope.task = task;
 
-            if (response.result.script && response.result.script.url && response.result.script.url !== url) {
-                $scope.query = response.result.script.url;
+        console.log(task);
+
+        //$scope.task = MobbrUri.info({ url: url, base_currency: mobbrSession.isAuthorized() && $scope.$mobbrStorage.user.currency_iso || 'EUR' }, function (response) {
+
+            if (task.result.script && task.result.script.url && task.result.script.url !== url) {
+                $scope.query = task.result.script.url;
                 url = $scope.query;
             }
 
-            if (!response.result.script) {
-                $scope.noScript = true;
+            if (!task.result.script || task.result.script.length === 0) {
+                $rootScope.noScript = true;
+                $state.go('payment.related');
             }
 
             if (url !== window.document.referrer) {
                 $scope.showTitle = true;
             }
 
-            $scope.relatedTasks = MobbrUri.get({
-                keywords: response.result.metadata.keywords,
-                base_currency: mobbrSession.isAuthorized() && $scope.$mobbrStorage.user.currency_iso || 'EUR'
-            }, function (response) {
-                //console.log(response);
-            }, $rootScope.handleMessage);
-
             $scope.url = url;
             $scope.taskUrl = $window.btoa(url);
-        }, $rootScope.handleMessage);
+        //}, $rootScope.handleMessage);
 
 
         function confirm(hash) {

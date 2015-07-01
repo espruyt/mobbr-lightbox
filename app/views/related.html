@@ -1,0 +1,32 @@
+<div ng-show="noScript">
+    <div class="row title-row grayfield">
+        <span ng-repeat="keyword in task.result.metadata.keywords" ng-bind="keyword" class="tag"></span>
+    </div>
+
+    <div class="row grayfield">
+        <a ng-repeat="url in relatedTasks.result" ng-href="{{ uiUrl + '/#/task/' + encodeTask(url.url) }}" target="_blank">
+            <div class="col-xs-12 col-sm-4 col-md-3 data-card-container">
+                <div class="data-card" ng-class="{ 'data-card-highlight': url.is_pledge == '1' }">
+                    <div class="top">
+                        <h3 ng-bind="url.title"></h3>
+                        <p ng-bind="url.description"></p>
+                    </div>
+                    <div class="bottom">
+                        <div class="item large tasks">
+                            <span ng-bind="url.match_percentage + '%'"></span>
+                            <span class="mobbricon mobbricon-tag"></span>
+                        </div>
+                        <div class="item large amount">
+                            <span ng-bind-html="url.amount_total | mobbrcurrency:url.currency_iso:true"></span>
+                            <span class="mobbricon mobbricon-payments"></span>
+                        </div>
+                        <div class="item">
+                            <span ng-bind="url.domain"></span>
+                            <span class="mobbricon mobbricon-domain"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
