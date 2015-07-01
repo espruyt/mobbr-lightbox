@@ -1,12 +1,4 @@
-<div class="row title-row grayfield">
-    <h1>You can earn money on these related tasks right now</h1>
-</div>
-
-<div class="row title-row grayfield">
-    <span ng-repeat="keyword in task.result.metadata.keywords" ng-bind="keyword" class="tag"></span>
-</div>
-
-<div class="row grayfield">
+<div class="row grayfield related-tasks">
     <a ng-repeat="url in relatedTasks.result" ng-href="{{ uiUrl + '/#/task/' + encodeTask(url.url) }}" target="_blank">
         <div class="col-xs-12 col-sm-4 col-md-3 data-card-container">
             <div class="data-card" ng-class="{ 'data-card-highlight': url.is_pledge == '1' }">

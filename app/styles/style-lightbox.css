@@ -8028,11 +8028,16 @@ td.username {
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003404}}
 .alert-noscript h1 {
-  margin-top: 0;
+  margin-bottom: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003408}}
 .alert-noscript .btn {
   margin-top: 12px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/styles\/_mobbr-lightbox\.scss}line{font-family:\00003413}}
+.related-tasks {
+  padding: 3px;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/C\:\/Users\/Han\/phpstorm\/mobbr-lightbox\/app\/components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap\/mixins\/_clearfix\.scss}line{font-family:\0000314}}
