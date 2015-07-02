@@ -66,13 +66,64 @@
         <script src="components/es5-shim/es5-shim.js"></script>
         <![endif]-->
         <!-- endbuild -->
-        <div class="ng-cloak messaging container-fluid">
+        <div class="ng-cloak messaging container-fluid" ng-show="message">
             <div class="container">
-                <alert ng-repeat="alert in mobbrMsg.messages" type="{{ alert.type }}" close="mobbrMsg.close($index)">{{ alert.msg }}</alert>
+                <alert class="alert-{{ message.type }}">
+                    {{ message.text }}
+                </alert>
             </div>
         </div>
 
         <div class="container lightbox" ng-cloak>
+            <header class="navbar navbar-top navbar-default" role="navigation">
+                <div class="row expand-pad">
+                    <div class="col-xs-12">
+                        <a ng-href="state.href('main')" class="logo text-right">
+                            <img src="img/logo-mobbr.png">
+                        </a>
+                    </div>
+
+                    <ul class="nav menu" ng-show="$state.includes('payment')">
+                        <li ng-class="{ 'active': $state.is('payment') }" ng-show="!noScript">
+                            <a ng-href="{{ $state.href('payment') }}" class="text-center">
+                                <span class="mobbricon mobbricon-transaction"></span>
+                                <small>{{ scriptType || 'Pledge' }}</small>
+                            </a>
+                        </li>
+                        <li ng-class="{ 'active': $state.is('payment.payments') }" ng-show="!noScript">
+                            <a ng-href="{{ $state.href('payment.payments') }}" class="text-center">
+                                <span class="mobbricon mobbricon-payments"></span>
+                                <small>Payments</small>
+                            </a>
+                        </li>
+                        <li ng-class="{ 'active': $state.is('payment.receivers') }" ng-show="!noScript">
+                            <a ng-href="{{ $state.href('payment.receivers') }}" class="text-center">
+                                <span class="mobbricon mobbricon-crowd"></span>
+                                <small>Receivers</small>
+                            </a>
+                        </li>
+                        <li ng-class="{ 'active': $state.is('payment.related') }">
+                            <a ng-href="{{ $state.href('payment.related') }}" class="text-center">
+                                <span class="mobbricon mobbricon-digger"></span>
+                                <small>Related</small>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="nav menu pull-right" ng-show="$state.includes('payment')">
+                        <li ng-class="{ 'active': $state.is('payment.login') }">
+                            <a ng-href="{{ $state.href('payment.login') }}" class="text-center">
+                                <img ng-show="mobbrSession && mobbrSession.isAuthorized()" ng-src="{{ $mobbrStorage.user.thumbnail }}" class=user-thumb width="45" height="50">
+                                <span ng-show="mobbrSession && !mobbrSession.isAuthorized()">
+                                    <span class="mobbricon mobbricon-person"></span>
+                                    <small>Login</small>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+            <div ng-show="loading" class="loader">Loading...</div>
             <div ui-view></div>
         </div>
         <!-- build:js scripts/combined.js -->
@@ -103,6 +154,7 @@
         <script src="scripts/controllers/PaymentController.js"></script>
         <script src="scripts/controllers/PaymentsController.js"></script>
         <script src="scripts/controllers/ReceiversController.js"></script>
+        <script src="scripts/controllers/RelatedController.js"></script>
         <!-- endbuild -->
     </body>
 </html>

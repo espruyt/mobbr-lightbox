@@ -1,6 +1,6 @@
 // lightbox coloring
 $darkgray:                                #161c22;
-$dullgray:                                #595f64;
+$dullgray:                                lighten(#595f64, 20);
 $tabgray:                                 #222a30;
 $activegray:                              #2e373d;
 
@@ -37,6 +37,7 @@ $navbar-default-link-active-color:        $white;
 $mobbrFont:                               'Roboto', sans-serif;
 $mobbrFontCondensed:                      'Roboto Condensed', sans-serif;
 $icon-font-path:                          '../fonts/';
+$icon-font-name:                          'mobbricon';
 $link-color:                              $mobbrblue;
 $link-hover-color:                        darken($link-color, 15%);
 $nav-tabs-active-link-hover-bg:           $mobbrblue;
@@ -50,3 +51,5 @@ $mobbrcallout:                            #ffcc00;
 $mobbrlightblue:                          #2fb3e7;
 $mobbrlightgreen:                         #8eb348;
 $mobbrlightyellow:                        #ffb348;
+
+$btn-danger-bg:                           $state-warning-bg;

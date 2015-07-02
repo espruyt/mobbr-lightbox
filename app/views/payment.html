@@ -1,74 +1,35 @@
-<header class="navbar navbar-fixed-top navbar-default" role="navigation">
-    <div class="container lightbox">
-        <div class="row expand-pad">
-            <div class="col-xs-12">
-                <a ng-href="state.href('main')" class="logo text-right">
-                    <img src="img/logo-mobbr.png">
-                </a>
-            </div>
-
-            <ul class="nav menu">
-                <li ng-class="{ 'active': $state.is('payment') }">
-                    <a ng-href="{{ $state.href('payment') }}" class="text-center">
-                        <span class="glyphicon glyphicon-bullhorn"></span>
-                        <small>Payment</small>
-                    </a>
-                </li>
-                <li ng-class="{ 'active': $state.is('payment.payments') }">
-                    <a ng-href="{{ $state.href('payment.payments') }}" class="text-center">
-                        <span class="glyphicon glyphicon-tasks"></span>
-                        <small>Payments</small>
-                    </a>
-                </li>
-                <li ng-class="{ 'active': $state.is('payment.receivers') }">
-                    <a ng-href="{{ $state.href('payment.receivers') }}" class="text-center">
-                        <span class="glyphicon glyphicon-transfer"></span>
-                        <small>Receivers</small>
-                    </a>
-                </li>
-            </ul>
-
-            <ul class="nav menu pull-right">
-                <li ng-class="{ 'active': $state.is('payment.login') }">
-                    <a ng-href="{{ $state.href('payment.login') }}" class="text-center">
-                        <img ng-show="mobbrSession && mobbrSession.isAuthorized()" ng-src="{{ $mobbrStorage.user.thumbnail }}" class=user-thumb width="50" height="50">
-                                <span ng-show="mobbrSession && !mobbrSession.isAuthorized()">
-                                    <span class="glyphicon glyphicon-user"></span>
-                                    <small>Login</small>
-                                </span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</header>
-
 <div ui-view></div>
 
 <div class="row">
     <div ng-show="$state.is('payment')" id="payment" class="page col-xs-12">
-        <div ng-show="message" ng-class="{info:message.type=='info',error:message.type=='error'}">
-            <span ng-bind="message.text"></span>
-            <i ng-click="message = ''" >x</i>
-        </div>
-        <div ng-show="paymentId">
-            share this ...
-        </div>
 
-        <div ng-show="!task.$resolved" class="loader">Loading...</div>
-
-        <div ng-show="task.$resolved">
-            <label>Paid on this so far</label>
-            <span ng-bind="task.result.statistics.amount_total | mobbrcurrency :task.result.statistics.amount_currency"></span>
-            <div ng-bind="task.result.script.message" ng-if="task.result.script.message"></div>
-            <a ng-href="{{ uiUrl }}/#/task/{{ taskUrl }}/view" class="btn btn-primary btn-block" target="_blank">View this task on Mobbr</a>
+        <h1 ng-if="showTitle" ng-bind=task.result.script.title></h1>
+        <div class="taskMessage" ng-bind="task.result.script.message" ng-if="task.result.script.message"></div>
+        <div class="row" ng-show="!showPreview && task.result.addresses.length > 0">
+            <fieldset class="form-group task-address" ng-repeat="address in task.result.addresses">
+                <div class="col-xs-12">
+                    <h2 class="row">
+                        <div class="col-xs-8">Pay to BTC address</div>
+                        <div class="col-xs-4">
+                            <a ng-href="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=bitcoin:{{ address.address }}" target="_blank" class="btn btn-primary btn-xs btn-block">
+                                BTC QR code
+                            </a>
+                        </div>
+                    </h2>
+                    <a ng-href="{{ 'bitcoin:' + address.address }}" class="btn btn-bitcoin btn-block">
+                        <img src="https://mobbr.com/img/bitcoin-icon.png" width="16">
+                        <span  ng-bind="address.address"></span>
+                    </a>
+                </div>
+            </fieldset>
         </div>
-        <form name="formHolder.pledgeForm" ng-show="!paymentId">
+        <form name="formHolder.pledgeForm" ng-show="task.$resolved && !paymentId && !noScript">
             <div>
-                Make a pledge on this item
-
-                <fieldset ng-disabled="!task.$resolved || paymentId || (showPreview && !paymentId)">
+                <fieldset ng-show="mobbrSession.isAuthorized()" ng-disabled="!task.$resolved || paymentId || (showPreview && !paymentId) || (previewLoading && !previewLoading.$resolved) || (confirmLoading && !confirmLoading.$resolved)">
                     <div class="row">
+                        <div class="col-xs-12">
+                            <h2>Pay from your Mobbr wallet</h2>
+                        </div>
                         <div class="col-xs-6">
                             <select class="form-control"
                                     required
@@ -96,27 +57,42 @@
                     </div>
                 </fieldset>
 
-                <div class="row">
-                    <div class="col-xs-12">
-                        <button class="btn btn-success btn-block" ng-click="preview(true)" ng-disabled="(!amount || !currency) || (showPreview && !paymentId)">Preview payment
-                            <i class="glyphicon mobbrloader" ng-show="!performing && previewLoading && !previewLoading.$resolved"></i>
-                        </button>
+                <fieldset class="buttons" ng-disabled="(previewLoading && !previewLoading.$resolved) || (confirmLoading && !confirmLoading.$resolved)">
+                    <div class="row" ng-show="mobbrSession.isAuthorized() && !showPreview">
+                        <div class="col-xs-12">
+                            <button class="btn btn-success btn-block" ng-click="preview(true)" ng-show="task.result.script.type != 'pledge'" ng-disabled="(!amount || !currency) || (showPreview && !paymentId)">Preview payment
+                                <i class="glyphicon mobbrloader" ng-show="!performing && previewLoading && !previewLoading.$resolved"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <button class="btn btn-primary btn-block" ng-click="performPayment()" ng-disabled="!formHolder.pledgeForm.$valid">Pledge/pay
-                            <i class="glyphicon mobbrloader" ng-show="performing && ((previewLoading && !previewLoading.$resolved) || (confirmLoading && !confirmLoading.$resolved) || (authenticating && !authenticating))"></i>
-                        </button>
+                    <div class="row" ng-show="!mobbrSession.isAuthorized()">
+                        <div class="col-xs-12">
+                            <button class="btn btn-success btn-block" ng-click="$state.go('payment.login')">Login to pay with Mobbr</button>
+                        </div>
                     </div>
-                </div>
+                    <div class="row" ng-show="(showPreview || task.result.script.type == 'pledge') && mobbrSession.isAuthorized()">
+                        <div class="col-xs-12">
+                            <button class="btn btn-success btn-block" ng-click="performPayment()" ng-disabled="!formHolder.pledgeForm.$valid" ng-bind="(task.result.script.type == 'pledge' ? 'Pledge' : 'Pay')"></button>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="showPreview && mobbrSession.isAuthorized()">
+                        <div class="col-xs-12">
+                            <button class="btn btn-danger btn-block" ng-click="showPreview = null;" >Cancel</button>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="!showPreview">
+                        <div class="col-xs-12">
+                            <a ng-href="{{ uiUrl }}/#/task/{{ taskUrl }}/view" class="btn btn-primary btn-block" target="_blank">View this task on Mobbr</a>
+                        </div>
+                    </div>
+                </fieldset>
             </div>
         </form>
     </div>
-    <div ng-show="showPreview && !paymentId" class="page">
-        <div class="col-xs-12" ng-show="!previewScript">
-            <div class="loader">Loading...</div>
-        </div>
+    <div class="col-xs-12" ng-show="(previewLoading && !previewLoading.$resolved) || (confirmLoading && !confirmLoading.$resolved)">
+        <div class="loader">Loading...</div>
+    </div>
+    <div ng-show="$state.is('payment') && showPreview && !paymentId" class="page">
         <table class="table" ng-show="previewScript">
             <thead class="hidden">
             <tr>

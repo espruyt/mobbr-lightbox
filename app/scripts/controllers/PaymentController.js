@@ -1,51 +1,43 @@
 angular.module('mobbr-lightbox.controllers')
-    .controller('PaymentController', function ($scope, $rootScope, $location, $state, $window, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession) {
+    .controller('PaymentController', function ($scope, $rootScope, $location, $state, $timeout, $window, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession, uiUrl, task) {
         'use strict';
+
+        var url = $rootScope.script || window.atob($state.params.hash);
 
         $scope.form = {};
         $scope.loginform = {};
         $scope.formHolder = {};
+        $scope.taskUrl = $state.params.hash;
+        $scope.task = task;
+        $rootScope.scriptType = task.result.script.type;
 
-        function handleMessage(response) {
-
-            var message;
-
-            $scope.showPreview = false;
-
-            if (response && response.data && response.data.message) {
-                message = response.data.message;
-            } else {
-                message = response.message;
-            }
-            if (message) {
-                if (message.type === 'error') {
-                    $scope.performing = false;
-                }
-                $scope.message = message;
-            }
+        if (task.result.script && task.result.script.url && task.result.script.url !== url) {
+            $scope.query = task.result.script.url;
+            url = $scope.query;
         }
 
-        var url = $rootScope.script || window.atob($state.params.hash);
+        if (!task.result.script || task.result.script.length === 0) {
+            $rootScope.noScript = true;
+            $state.go('payment.related');
+        }
 
-        $scope.task = MobbrUri.info({ url: url }, function (response) {
+        if (url !== window.document.referrer) {
+            $scope.showTitle = true;
+        }
 
-            if (response.result.script && response.result.script.url && response.result.script.url !== url) {
-                $scope.query = response.result.script.url;
-                url = $scope.query;
-            }
-            $scope.url = url;
-            $scope.taskUrl = $window.btoa(url);
-        }, handleMessage);
-
+        $scope.url = url;
+        $scope.taskUrl = $window.btoa(url);
 
         function confirm(hash) {
             $scope.confirmLoading = MobbrPayment.confirm({hash: hash}, function (response) {
-
                 if (response.result && response.result.payment_id) {
-                    $scope.paymentId = response.result.payment_id;
-                    handleMessage(response);
+                    $rootScope.handleMessage(response);
+                    $scope.amount = null;
+                    $state.go('payment.payments');
                 }
-            }, handleMessage);
+            }, function (response) {
+                $rootScope.handleMessage(response);
+            });
         }
 
         $scope.preview = function (showPreview, callBack) {
@@ -62,9 +54,12 @@ angular.module('mobbr-lightbox.controllers')
                         callBack(response.result.hash);
                     }
                     $scope.previewScript = response.result.script;
-                }, handleMessage);
+                }, function (response) {
+                    $scope.showPreview = false;
+                    $rootScope.handleMessage(response);
+                });
             }
-        }
+        };
 
         function perform() {
             $scope.preview(false, confirm);
@@ -73,14 +68,9 @@ angular.module('mobbr-lightbox.controllers')
         $scope.performPayment = function () {
             $scope.performing = true;
             if ($scope.formHolder.pledgeForm && $scope.formHolder.pledgeForm.$valid) {
-                //if (mobbrSession.isAuthorized()) {
-                    perform();
-                //} else {
-                //    $scope.authenticating = MobbrUser.passwordLogin({ username: $scope.loginform.username, password: $scope.loginform.password }, function () {
-                //        perform();
-                //    }, handleMessage);
-               // }
+                perform();
             }
         };
 
+        $scope.uiUrl = uiUrl;
     });

@@ -27,7 +27,13 @@ angular.module('mobbr-lightbox', [
             .state('payment', {
                 url: '/hash/:hash',
                 templateUrl: 'views/payment.html',
-                controller: 'PaymentController'
+                controller: 'PaymentController',
+                resolve: {
+                    task: function ($rootScope, $window, $stateParams, mobbrSession, MobbrUri) {
+                        var url = $rootScope.script || $window.atob($stateParams.hash);
+                        return MobbrUri.info({ url: url, base_currency: mobbrSession.isAuthorized() && $rootScope.$mobbrStorage.user.currency_iso || 'EUR' }).$promise;
+                    }
+                }
             })
             .state('payment.login', {
                 url: '/login',
@@ -53,6 +59,11 @@ angular.module('mobbr-lightbox', [
                 templateUrl: 'views/receivers.html',
                 controller: 'ReceiversController'
             })
+            .state('payment.related', {
+                url: '/related',
+                templateUrl: 'views/related.html',
+                controller: 'RelatedController'
+            })
             .state('payment.logout', {
                 url: '/logout',
                 controller: 'LogoutController'
@@ -65,17 +76,32 @@ angular.module('mobbr-lightbox', [
 
         $urlRouterProvider.otherwise('/');
 
-    }).run(function ($http, $rootScope, $state, $location, $window, MobbrApi, MobbrUser, environment, mobbrSession, MobbrBalance, uiUrl, filterFilter) {
+    }).run(function ($http, $rootScope, $state, $timeout, $location, $window, MobbrApi, MobbrUser, environment, mobbrSession, MobbrBalance, uiUrl, filterFilter) {
 
             $rootScope.mobbrSession = mobbrSession;
             $rootScope.$state = $state;
             $rootScope.uiUrl = uiUrl;
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams,fromState) {
-            if (!(toState.name === 'main' && fromState.url === '^')) {
+            if (!(toState.name === 'main' && (!fromState || fromState.url === '^'))) {
                 $window.ga('send', 'pageview', { page: $location.path() });
             }
         });
+
+        $rootScope.handleMessage = function (response) {
+
+            var message;
+
+            message = response.data && response.data.message || response.message;
+
+            if (message) {
+                $rootScope.message = message;
+                $rootScope.message.type = response.status[0] === 2 ? 'success' : 'danger';
+                $timeout(function () {
+                    $rootScope.message = null;
+                }, 3000);
+            }
+        };
 
         function setCurrencies() {
             if (mobbrSession.isAuthorized()) {
@@ -88,7 +114,7 @@ angular.module('mobbr-lightbox', [
         }
 
         function listener(event) {
-            if (!event.data.url || event.data.url && event.data.url.indexOf(event.origin) === -1) {
+            if ((!event || !event.data || !event.data.url) || (event && event.data && event.data.url && event.data.url.indexOf(event.origin) === -1)) {
                 return;
             } else {
                 $rootScope.script = event.data;
@@ -100,6 +126,21 @@ angular.module('mobbr-lightbox', [
         } else {
             attachEvent('onmessage', listener)
         }
+
+        $rootScope.logout = function () {
+            MobbrUser.logout().$promise.then(function () {
+                if ($state.includes('payment')) {
+                    $state.go('payment.login');
+                } else {
+                    $state.go('login');
+                }
+
+            });
+        };
+
+        $rootScope.encodeTask = function (url) {
+            return $window.btoa(url);
+        };
 
 
         $rootScope.$on('mobbrApi:authchange', function (e, user) {
@@ -116,24 +157,50 @@ angular.module('mobbr-lightbox', [
             setCurrencies();
         });
 
+        $rootScope.getLanguage = function () {
+            return $rootScope.$mobbrStorage.user && $rootScope.$mobbrStorage.user.language_iso || ($window.navigator.userLanguage || $window.navigator.language).toUpperCase();
+        }
+
         $rootScope.$on('mobbrApi:authchange', setCurrencies);
 
-            $rootScope.linkUrl = function (url) {
-                return '/#/url/' + window.btoa(url);
-            }
-
-            $rootScope.isTest = function () {
-                return environment !== 'production';
-            }
-
-            $rootScope.currenciesMap = {};
-            MobbrApi.currencies(function (response) {
-                if (response.result != null) {
-                    $rootScope.currenciesMap = response.result;
-                } else if (response.message != null) {
-                    console.log('error loading currencies' + response.error.status);
-                }
-                $rootScope.currenciesMap['MBR'] = 'Mobbr';
-            });
+        $rootScope.linkUrl = function (url) {
+            return '/#/url/' + window.btoa(url);
         }
+
+        $rootScope.isTest = function () {
+            return environment !== 'production';
+        }
+
+        $rootScope.currenciesMap = {};
+        MobbrApi.currencies(function (response) {
+            if (response.result != null) {
+                $rootScope.currenciesMap = response.result;
+            } else if (response.message != null) {
+            }
+            $rootScope.currenciesMap['MBR'] = 'Mobbr';
+        });$rootScope.linkUrl = function (url) {
+            return '/#/url/' + window.btoa(url);
+        }
+
+        $rootScope.isTest = function () {
+            return environment !== 'production';
+        }
+
+        $rootScope.currenciesMap = {};
+        MobbrApi.currencies(function (response) {
+            if (response.result != null) {
+                $rootScope.currenciesMap = response.result;
+            } else if (response.message != null) {
+            }
+            $rootScope.currenciesMap['MBR'] = 'Mobbr';
+        });
+
+        $rootScope.$on('$stateChangeStart', function () {
+            $rootScope.loading = true;
+        });
+
+        $rootScope.$on('$stateChangeSuccess', function () {
+            $rootScope.loading = false;
+        });
+    }
 );
