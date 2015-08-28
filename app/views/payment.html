@@ -5,6 +5,20 @@
 
         <h1 ng-if="showTitle" ng-bind=task.result.script.title></h1>
         <div class="taskMessage" ng-bind="task.result.script.message" ng-if="task.result.script.message"></div>
+
+        <div class="row page" ng-show="task.$resolved && task.result.statistics.amount_total > 0">
+            <div class="col-md-12">
+                <span ng-bind="task.result.statistics.is_pledge == '1' ? 'Pledged' : 'Paid'"></span>
+                <span> on this so far</span>
+                <strong ng-bind="task.result.statistics.amount_total | mobbrcurrency :task.result.statistics.amount_currency"></strong>
+            </div>
+        </div>
+        <div class="row page" ng-show="task.$resolved && task.result.statistics.amount_total == 0">
+            <div class="col-md-12">
+                <span>No payments yet</span>
+            </div>
+        </div>
+
         <div class="row" ng-show="!showPreview && task.result.addresses.length > 0">
             <fieldset class="form-group task-address" ng-repeat="address in task.result.addresses">
                 <div class="col-xs-12">
