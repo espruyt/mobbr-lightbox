@@ -13,11 +13,13 @@ angular.module('mobbr-lightbox.controllers')
 
         $scope.pay_currency = 'USD';
         $scope.pay_amount = 0;
-        $scope.pay_amount_btc = 0;
+
+        $scope.currency = 'BTC';
+        $scope.amount = 0;
 
         $scope.convertPayAmountToBTC = function(currency, amount) {
             var btc_exchange_rate = parseFloat(($rootScope.currenciesMap[currency]['exchange_rate']).replace(',','.'));
-            $scope.pay_amount_btc = $filter('number')(amount/btc_exchange_rate, 6);
+            $scope.amount = $filter('number')(amount/btc_exchange_rate, 6);
         };
 
         if (task.result.script && task.result.script.url && task.result.script.url !== url) {

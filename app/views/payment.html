@@ -25,43 +25,43 @@
         <div>Pay for this task by sending money to the bitcoin address below or via your Mobbr bitcoin wallet. The money will be distributed to the contributor(s) who worked on the task.</div>
 
         <div class="row" ng-show="!showPreview && task.result.addresses.length > 0">
+            <fieldset class="form-group task-address">
+                <div class="col-xs-12">Choose an amount</div>
+                <div class="col-xs-6">
+                    <select class="form-control"
+                            required
+                            ng-init="pay_currency = 'USD'"
+                            ng-model="pay_currency"
+                            ng-change="convertPayAmountToBTC(pay_currency, pay_amount)"
+                            ng-options="curr as curr for curr in ['USD', 'EUR']"></select>
+                </div>
+                <div class="col-xs-6">
+                    <input class="form-control"
+                           required
+                           type="number"
+                           ng-init="pay_amount = 0"
+                           ng-model="pay_amount"
+                           ng-change="convertPayAmountToBTC(pay_currency, pay_amount)"
+                           step="any"
+                           min="0"
+                           max="1000000000">
+                </div>
+                <div class="col-xs-12">
+                    <h4><img src="https://mobbr.com/img/bitcoin-icon.png" width="18"> BTC <span ng-bind="amount"></span></h4>
+                </div>
+            </fieldset>
             <fieldset class="form-group task-address" ng-repeat="address in task.result.addresses">
                 <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-xs-12"><h2>Pay from any bitcoin wallet</h2></div>
-                        <div class="col-xs-6">
-                            <select class="form-control"
-                                    required
-                                    ng-init="pay_currency = 'USD'"
-                                    ng-model="pay_currency"
-                                    ng-change="convertPayAmountToBTC(pay_currency, pay_amount)"
-                                    ng-options="curr as curr for curr in ['USD', 'EUR']"></select>
-                        </div>
-                        <div class="col-xs-6">
-                            <input class="form-control"
-                                   required
-                                   type="number"
-                                   ng-init="pay_amount = 0"
-                                   ng-model="pay_amount"
-                                   ng-change="convertPayAmountToBTC(pay_currency, pay_amount)"
-                                   step="any"
-                                   min="0"
-                                   max="1000000000">
-                        </div>
-                        <div class="col-xs-12">
-                            <h4><img src="https://mobbr.com/img/bitcoin-icon.png" width="18"> BTC <span ng-bind="pay_amount_btc"></span></h4>
-                        </div>
-                    </div>
-
+                    <div><h2>Pay from any bitcoin wallet</h2></div>
                     <div>Pay to BTC address</div>
-                    <a ng-href="{{ 'bitcoin:' + address.address + '?amount=' + pay_amount_btc }}" class="btn btn-bitcoin btn-block">
+                    <a ng-href="{{ 'bitcoin:' + address.address + '?amount=' + amount }}" class="btn btn-bitcoin btn-block">
                         <img src="https://mobbr.com/img/bitcoin-icon.png" width="16">
-                        <span ng-bind="address.address + '?amount=' + pay_amount_btc"></span>
+                        <span ng-bind="address.address + '?amount=' + amount"></span>
                     </a>
                     <div>BTC QR code</div>
                     <div class="row">
                         <div class="col-xs-8 col-sm-4">
-                            <img ng-src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=bitcoin:{{ address.address + '?amount=' + pay_amount_btc }}" style="width:100%;max-width: 300px;">
+                            <img ng-src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=bitcoin:{{ address.address + '?amount=' + amount }}" style="width:100%;max-width: 300px;">
                         </div>
                     </div>
                 </div>
@@ -75,21 +75,8 @@
                         <div class="col-xs-12">
                             <h2>Pay from your Mobbr wallet</h2>
                         </div>
-                        <div class="col-xs-6">
-                            <select class="form-control"
-                                    required
-                                    ng-init="currency = $mobbrStorage.user.currency_iso || 'EUR'"
-                                    ng-model="currency"
-                                    ng-options="curr.currency_iso as curr.currency_iso for curr in userCurrencies"></select>
-                        </div>
-                        <div class="col-xs-6">
-                            <input class="form-control"
-                                   required
-                                   type="number"
-                                   ng-model="amount"
-                                   step="any"
-                                   min="0"
-                                   max="1000000000">
+                        <div class="col-xs-12">
+                            <h4><img src="https://mobbr.com/img/bitcoin-icon.png" width="18"> BTC <span ng-bind="amount"></span></h4>
                         </div>
                         <div class="col-xs-12">
                             <div class="checkbox">
