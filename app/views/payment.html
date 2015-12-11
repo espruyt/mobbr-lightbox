@@ -4,7 +4,6 @@
     <div ng-show="$state.is('payment')" id="payment" class="page col-xs-12">
 
         <h1 ng-if="showTitle" ng-bind=task.result.script.title></h1>
-        <div class="taskMessage" ng-bind="task.result.script.message" ng-if="task.result.script.message"></div>
 
         <div class="row page" ng-show="task.$resolved && task.result.statistics.amount_total > 0">
             <div class="col-md-12">
@@ -18,25 +17,57 @@
                 <span>No payments yet</span>
             </div>
         </div>
+        <div>
+            <a ng-href="{{ task.result.script.url }}" class="btn btn-primary btn-block" target="_blank">View this task</a>
+        </div>
+
+        <div class="taskMessage" ng-bind="task.result.script.message" ng-if="task.result.script.message"></div>
+        <div>Pay for this task by sending money to the bitcoin address below or via your Mobbr bitcoin wallet. The money will be distributed to the contributor(s) who worked on the task.</div>
 
         <div class="row" ng-show="!showPreview && task.result.addresses.length > 0">
             <fieldset class="form-group task-address" ng-repeat="address in task.result.addresses">
                 <div class="col-xs-12">
-                    <h2 class="row">
-                        <div class="col-xs-8">Pay to BTC address</div>
-                        <div class="col-xs-4">
-                            <a ng-href="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=bitcoin:{{ address.address }}" target="_blank" class="btn btn-primary btn-xs btn-block">
-                                BTC QR code
-                            </a>
+                    <div class="row">
+                        <div class="col-xs-12"><h2>Pay from any bitcoin wallet</h2></div>
+                        <div class="col-xs-6">
+                            <select class="form-control"
+                                    required
+                                    ng-init="pay_currency = 'USD'"
+                                    ng-model="pay_currency"
+                                    ng-change="convertPayAmountToBTC(pay_currency, pay_amount)"
+                                    ng-options="curr as curr for curr in ['USD', 'EUR']"></select>
                         </div>
-                    </h2>
-                    <a ng-href="{{ 'bitcoin:' + address.address }}" class="btn btn-bitcoin btn-block">
+                        <div class="col-xs-6">
+                            <input class="form-control"
+                                   required
+                                   type="number"
+                                   ng-init="pay_amount = 0"
+                                   ng-model="pay_amount"
+                                   ng-change="convertPayAmountToBTC(pay_currency, pay_amount)"
+                                   step="any"
+                                   min="0"
+                                   max="1000000000">
+                        </div>
+                        <div class="col-xs-12">
+                            <h4><img src="https://mobbr.com/img/bitcoin-icon.png" width="18"> BTC <span ng-bind="pay_amount_btc"></span></h4>
+                        </div>
+                    </div>
+
+                    <div>Pay to BTC address</div>
+                    <a ng-href="{{ 'bitcoin:' + address.address + '?amount=' + pay_amount_btc }}" class="btn btn-bitcoin btn-block">
                         <img src="https://mobbr.com/img/bitcoin-icon.png" width="16">
-                        <span  ng-bind="address.address"></span>
+                        <span ng-bind="address.address + '?amount=' + pay_amount_btc"></span>
                     </a>
+                    <div>BTC QR code</div>
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-4">
+                            <img ng-src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=bitcoin:{{ address.address + '?amount=' + pay_amount_btc }}" style="width:100%;max-width: 300px;">
+                        </div>
+                    </div>
                 </div>
             </fieldset>
         </div>
+
         <form name="formHolder.pledgeForm" ng-show="task.$resolved && !paymentId && !noScript">
             <div>
                 <fieldset ng-show="mobbrSession.isAuthorized()" ng-disabled="!task.$resolved || paymentId || (showPreview && !paymentId) || (previewLoading && !previewLoading.$resolved) || (confirmLoading && !confirmLoading.$resolved)">

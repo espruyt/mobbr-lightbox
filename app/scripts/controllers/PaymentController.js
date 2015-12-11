@@ -1,5 +1,5 @@
 angular.module('mobbr-lightbox.controllers')
-    .controller('PaymentController', function ($scope, $rootScope, $location, $state, $timeout, $window, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession, uiUrl, task) {
+    .controller('PaymentController', function ($scope, $rootScope, $location, $state, $timeout, $window, $filter, MobbrPayment, MobbrPerson, MobbrBalance, MobbrUri, MobbrUser, mobbrSession, uiUrl, task) {
         'use strict';
 
         var url = $rootScope.script || window.atob($state.params.hash);
@@ -10,6 +10,15 @@ angular.module('mobbr-lightbox.controllers')
         $scope.taskUrl = $state.params.hash;
         $scope.task = task;
         $rootScope.scriptType = task.result.script.type;
+
+        $scope.pay_currency = 'USD';
+        $scope.pay_amount = 0;
+        $scope.pay_amount_btc = 0;
+
+        $scope.convertPayAmountToBTC = function(currency, amount) {
+            var btc_exchange_rate = parseFloat(($rootScope.currenciesMap[currency]['exchange_rate']).replace(',','.'));
+            $scope.pay_amount_btc = $filter('number')(amount/btc_exchange_rate, 6);
+        };
 
         if (task.result.script && task.result.script.url && task.result.script.url !== url) {
             $scope.query = task.result.script.url;
