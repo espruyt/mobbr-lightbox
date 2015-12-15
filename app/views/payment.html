@@ -89,7 +89,7 @@
                             <button class="btn btn-success btn-block" ng-click="performPayment()" ng-disabled="!formHolder.pledgeForm.$valid" ng-bind="(task.result.script.type == 'pledge' ? 'Pledge' : 'Pay')"></button>
                         </div>
                     </div>
-                    <div ng-hide="amount" class="alert alert-danger">Enter an amount to see <span ng-bind="(task.result.script.type == 'pledge' ? 'Pledge' : 'Pay')"></span> button</div>
+                    <div ng-hide="amount > 0" class="alert alert-danger">Enter an amount to see <span ng-bind="(task.result.script.type == 'pledge' ? 'Pledge' : 'Pay')"></span> button</div>
                     <div class="row" ng-show="showPreview && mobbrSession.isAuthorized()">
                         <div class="col-xs-12">
                             <button class="btn btn-danger btn-block" ng-click="showPreview = null;" >Cancel</button>
@@ -101,7 +101,7 @@
                         </div>
                     </div>
                     <br/>
-                    <div class="row" ng-show="amount">
+                    <div class="row" ng-show="amount > 0">
                         <div class="col-xs-12">
                             <button class="btn btn-success btn-block" ng-click="preview(true)" ng-show="task.result.script.type != 'pledge'" ng-disabled="(!amount || !currency)">Update Recipients
                                 <i class="glyphicon mobbrloader" ng-show="!performing && previewLoading && !previewLoading.$resolved"></i>
