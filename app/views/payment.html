@@ -24,10 +24,9 @@
         <div class="taskMessage" ng-bind="task.result.script.message" ng-if="task.result.script.message"></div>
         <div>Pay for this task by sending money to the bitcoin address below or via your Mobbr bitcoin wallet. The money will be distributed to the contributor(s) who worked on the task.</div>
 
-        <div class="row" ng-show="!showPreview && task.result.addresses.length > 0">
+        <div class="row" ng-show="task.result.addresses.length > 0">
             <fieldset class="form-group task-address">
-                <div class="col-xs-12"></div>
-                <div><h2>Choose an amount</h2></div>
+                <div class="col-xs-12"><h2>Enter an amount</h2></div>
                 <div class="col-xs-6">
                     <select class="form-control"
                             required
@@ -80,13 +79,6 @@
                 </fieldset>
 
                 <fieldset class="buttons" ng-disabled="(previewLoading && !previewLoading.$resolved) || (confirmLoading && !confirmLoading.$resolved)">
-                    <div class="row" ng-show="mobbrSession.isAuthorized() && !showPreview">
-                        <div class="col-xs-12">
-                            <button class="btn btn-success btn-block" ng-click="preview(true)" ng-show="task.result.script.type != 'pledge'" ng-disabled="(!amount || !currency) || (showPreview && !paymentId)">Preview payment
-                                <i class="glyphicon mobbrloader" ng-show="!performing && previewLoading && !previewLoading.$resolved"></i>
-                            </button>
-                        </div>
-                    </div>
                     <div class="row" ng-show="!mobbrSession.isAuthorized()">
                         <div class="col-xs-12">
                             <button class="btn btn-success btn-block" ng-click="$state.go('payment.login')">Login to pay with Mobbr</button>
@@ -97,14 +89,23 @@
                             <button class="btn btn-success btn-block" ng-click="performPayment()" ng-disabled="!formHolder.pledgeForm.$valid" ng-bind="(task.result.script.type == 'pledge' ? 'Pledge' : 'Pay')"></button>
                         </div>
                     </div>
+                    <div ng-hide="amount" class="alert alert-danger">Enter an amount to see <span ng-bind="(task.result.script.type == 'pledge' ? 'Pledge' : 'Pay')"></span> button</div>
                     <div class="row" ng-show="showPreview && mobbrSession.isAuthorized()">
                         <div class="col-xs-12">
                             <button class="btn btn-danger btn-block" ng-click="showPreview = null;" >Cancel</button>
                         </div>
                     </div>
-                    <div class="row" ng-show="!showPreview">
+                    <div class="row">
                         <div class="col-xs-12">
                             <a ng-href="{{ uiUrl }}/#/task/{{ taskUrl }}/view" class="btn btn-primary btn-block" target="_blank">View this task on Mobbr</a>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row" ng-show="amount">
+                        <div class="col-xs-12">
+                            <button class="btn btn-success btn-block" ng-click="preview(true)" ng-show="task.result.script.type != 'pledge'" ng-disabled="(!amount || !currency)">Update Recipients
+                                <i class="glyphicon mobbrloader" ng-show="!performing && previewLoading && !previewLoading.$resolved"></i>
+                            </button>
                         </div>
                     </div>
                 </fieldset>
@@ -116,8 +117,11 @@
     </div>
     <div ng-show="$state.is('payment') && showPreview && !paymentId" class="page">
         <table class="table" ng-show="previewScript">
-            <thead class="hidden">
+            <thead>
             <tr>
+                <th colspan="4">RECIPIENTS</th>
+            </tr>
+            <tr class="hidden">
                 <th>
 
                 </th>

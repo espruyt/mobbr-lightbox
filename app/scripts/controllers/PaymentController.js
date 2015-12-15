@@ -20,6 +20,7 @@ angular.module('mobbr-lightbox.controllers')
         $scope.convertPayAmountToBTC = function(currency, amount) {
             var btc_exchange_rate = parseFloat(($rootScope.currenciesMap[currency]['exchange_rate']).replace(',','.'));
             $scope.amount = $filter('number')(amount/btc_exchange_rate, 6);
+            $scope.preview(true);
         };
 
         if (task.result.script && task.result.script.url && task.result.script.url !== url) {
