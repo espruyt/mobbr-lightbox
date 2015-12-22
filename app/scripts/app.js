@@ -31,7 +31,7 @@ angular.module('mobbr-lightbox', [
                 resolve: {
                     task: function ($rootScope, $window, $stateParams, mobbrSession, MobbrUri) {
                         var url = $rootScope.script || $window.atob($stateParams.hash);
-                        return MobbrUri.info({ url: url, base_currency: mobbrSession.isAuthorized() && $rootScope.$mobbrStorage.user.currency_iso || 'EUR' }).$promise;
+                        return MobbrUri.info({ url: url, base_currency: mobbrSession.isAuthorized() && $rootScope.$mobbrStorage.user.currency_iso || 'USD' }).$promise;
                     }
                 }
             })

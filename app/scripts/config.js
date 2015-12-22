@@ -1,4 +1,4 @@
-(function() { 
+(function() {
  return angular.module("mobbr-lightbox.config", [])
 
 .constant("lightboxUrl", "https://test-www.mobbr.com/lightbox/#")
@@ -9,6 +9,6 @@
 
 .constant("environment", "test")
 
-; 
+;
 
 })();
