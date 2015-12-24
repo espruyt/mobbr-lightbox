@@ -12,7 +12,7 @@ angular.module('mobbr-lightbox.controllers')
         $rootScope.scriptType = task.result.script.type;
 
         var lightbox_meta = parent.document.querySelector("meta[name='lightbox']");
-        var lightbox_meta_content = lightbox_meta.getAttribute('content');
+        var lightbox_meta_content = lightbox_meta && lightbox_meta.getAttribute('content') || null;
         $scope.task_metadata = (lightbox_meta_content)?angular.fromJson(lightbox_meta_content):{};
 
         $scope.pay_currencies = ['USD', 'EUR'];
