@@ -15,14 +15,15 @@ angular.module('mobbr-lightbox.controllers')
         var lightbox_meta_content = lightbox_meta.getAttribute('content');
         $scope.task_metadata = (lightbox_meta_content)?angular.fromJson(lightbox_meta_content):{};
 
-        $scope.pay_currency = 'USD';
+        $scope.pay_currencies = ['USD', 'EUR'];
+        $scope.pay_currency = ($scope.task_metadata.currency && $scope.pay_currencies.indexOf($scope.task_metadata.currency) != -1)?$scope.task_metadata.currency:'USD';
         $scope.pay_amount = $scope.task_metadata.amount || 0;
 
         $scope.currency = 'BTC';
         $scope.amount = 0;
 
-        var task_json = angular.fromJson(task.result.metadata.json);
-        $scope.originalRecipients = angular.copy(task_json.participants);
+        var task_json = (task.result.metadata && task.result.metadata.json)?angular.fromJson(task.result.metadata.json):null;
+        $scope.originalRecipients = (task_json && task_json.participants && angular.isArray(task_json.participants))?angular.copy(task_json.participants):(task.result.script.participants || []);
 
         $scope.convertPayAmountToBTC = function(currency, amount) {
             if($rootScope.currenciesMap[currency]) {
@@ -103,6 +104,7 @@ angular.module('mobbr-lightbox.controllers')
 
         $scope.uiUrl = uiUrl;
 
+        $scope.allRecipients = angular.isArray($scope.originalRecipients)?$scope.originalRecipients:[];
         $scope.showAddRecipientsBox = function() {
             $rootScope.script = {
                 url: task.result.script.url || $scope.url,
@@ -110,13 +112,11 @@ angular.module('mobbr-lightbox.controllers')
                 title: task.result.script.title || '',
                 description: task.result.script.description || '',
                 keywords: task.result.script.keywords || [],
-                participants: task.result.script.participants || []
+                participants: $scope.allRecipients || []
             };
             $scope.showAddRecipients = true;
-            console.log($rootScope.script);
         };
 
-        $scope.allRecipients = angular.isArray($scope.originalRecipients)?$scope.originalRecipients:[];
         //Should have at least 2 recipients, site owner and at least one contributor
         if($scope.allRecipients.length < 2 && $scope.task_metadata.editable && $scope.task_metadata.ajax_url) {
             $scope.showAddRecipientsBox();
@@ -125,8 +125,11 @@ angular.module('mobbr-lightbox.controllers')
             var error = {message: {text: "Enter valid email address"}, status: [0]};
 
             var email_regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i;
-            if(!email_regex.test(id)) {
-                error.message.text = "Enter valid email address";
+            var url_regex = /\b(?:https?:\/\/)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i;
+
+            var is_valid_email = email_regex.test(id);
+            if(!is_valid_email && !url_regex.test(id)) {
+                error.message.text = "Enter valid email address or profile url";
                 $rootScope.handleMessage(error);
                 return;
             }
@@ -137,7 +140,10 @@ angular.module('mobbr-lightbox.controllers')
                 return;
             }
 
-            $scope.allRecipients.push({id: 'mailto:'+id, share: share, role: 'contributor'});
+            if(is_valid_email)
+                id = 'mailto:'+id;
+
+            $scope.allRecipients.push({id: id, share: share, role: 'contributor'});
             $scope.recipient_id = '';
             $scope.recipient_share = '';
         };

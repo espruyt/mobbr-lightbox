@@ -29,10 +29,9 @@
                 <div class="col-xs-6">
                     <select class="form-control"
                             required
-                            ng-init="pay_currency = 'USD'"
                             ng-model="pay_currency"
                             ng-change="convertPayAmountToBTC(pay_currency, pay_amount)"
-                            ng-options="curr as curr for curr in ['USD', 'EUR']"></select>
+                            ng-options="curr as curr for curr in pay_currencies"></select>
                 </div>
                 <div class="col-xs-6">
                     <input class="form-control"
@@ -61,7 +60,7 @@
                                required
                                type="text"
                                ng-model="recipient_id"
-                               placeholder="username, email address or ID">
+                               placeholder="email address or profile url">
                     </div>
                 </div>
                 <div class="col-xs-12">
