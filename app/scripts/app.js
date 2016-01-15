@@ -31,7 +31,7 @@ angular.module('mobbr-lightbox', [
                 resolve: {
                     task: function ($rootScope, $window, $stateParams, mobbrSession, MobbrUri) {
                         var url = $rootScope.script || $window.atob($stateParams.hash);
-                        return MobbrUri.info({ url: url, base_currency: mobbrSession.isAuthorized() && $rootScope.$mobbrStorage.user.currency_iso || 'EUR' }).$promise;
+                        return MobbrUri.info({ url: url, base_currency: mobbrSession.isAuthorized() && $rootScope.$mobbrStorage.user.currency_iso || 'USD' }).$promise;
                     }
                 }
             })
@@ -149,7 +149,7 @@ angular.module('mobbr-lightbox', [
             }
         });
 
-        $rootScope.currencies = MobbrApi.currencies(function (response) {
+        $rootScope.currencies = MobbrApi.currencies({base_currency: 'BTC'}, function (response) {
             $rootScope.networkCurrencies = filterFilter($rootScope.currencies.result, { wallet_support: true });
             response.result.forEach(function (item) {
                 $rootScope.currenciesMap[item.currency_iso] = item;
@@ -174,7 +174,7 @@ angular.module('mobbr-lightbox', [
         $rootScope.currenciesMap = {};
         MobbrApi.currencies(function (response) {
             if (response.result != null) {
-                $rootScope.currenciesMap = response.result;
+                //$rootScope.currenciesMap = response.result;
             } else if (response.message != null) {
             }
             $rootScope.currenciesMap['MBR'] = 'Mobbr';
@@ -189,7 +189,7 @@ angular.module('mobbr-lightbox', [
         $rootScope.currenciesMap = {};
         MobbrApi.currencies(function (response) {
             if (response.result != null) {
-                $rootScope.currenciesMap = response.result;
+                //$rootScope.currenciesMap = response.result;
             } else if (response.message != null) {
             }
             $rootScope.currenciesMap['MBR'] = 'Mobbr';

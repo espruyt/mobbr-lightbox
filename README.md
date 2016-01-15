@@ -18,4 +18,4 @@ bower install
 5. deployment
 - deploying user should copy his ssh key to the server
 - deploying user should be a member of www-data: ```sudo usermod -a -G www-data <username>```
-- run ```grunt deploy``` with optional environment value of 'test' (default) or 'prod': ```grunt deploy --env=<environment>```
+- run ```grunt deploy``` with optional environment value of 'test' (default) or 'production': ```grunt deploy --env=<environment>```
